@@ -1,0 +1,40 @@
+<aside id="logo-sidebar"
+    class="fixed top-0 left-0 z-40 w-60 h-screen  transition-transform -translate-x-full   border-gray-200 sm:translate-x-0 bg-blue-50 dark:bg-blue-50 dark:border-gray-700"
+    aria-label="Sidebar">
+    <div class="flex items-center justify-center px-4 py-0 border-r-2 border-blue-900">
+        <!-- Logo section: cliquable et responsive -->
+        <a routerLink="/" class="block">
+            <img src="../../../../assets/images/icons_logos/company_logo.png" alt="Company Logo"
+                class="h-14 w-full object-contain">
+        </a>
+    </div>
+
+    <div class="h-full px-3 pb-4 overflow-y-auto bg-blue-900 dark:bg-blue-900">
+        <ul class="space-y-2 font-medium">
+            <li *ngFor="let item of navItems">
+                <a *ngIf="!item.disabled" [routerLink]="item.url"
+                    class="flex items-center gap-1 p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <i *ngIf="item.icon" [class]="item.icon"></i> {{ item.title }}
+                    <span *ngIf="item.badge" [class]="item.badge.class">{{ item.badge.count }}</span>
+
+                    <!-- Toggle button for dropdown if children exist -->
+                    <button *ngIf="item.children?.length" (click)="toggleDropdown(item)" type="button"
+                        class="ml-auto text-gray-400 hover:text-gray-500 dark:hover:text-white">
+                        <i [class]="item.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
+                    </button>
+                </a>
+
+                <!-- Dropdown for children -->
+                <ul *ngIf="item.children?.length && item.isOpen" class="space-y-2 font-medium">
+                    <li *ngFor="let child of item.children">
+                        <a [routerLink]="child.url"
+                            class="flex items-center p-2 pl-8 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <i *ngIf="child.icon" [class]="child.icon"></i> {{ child.title }}
+                            <span *ngIf="child.badge" [class]="child.badge.class">{{ child.badge.count }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</aside>
