@@ -18,6 +18,7 @@
 
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Gestion Employes ::.</title>
@@ -31,29 +32,38 @@
   <style>
     /* Ajouter une animation personnalisée */
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     .spinner {
-      border: 4px solid rgba(0, 0, 0, 0.1); /* Légère transparence */
-      border-top-color: #ff5722; /* Couleur orange pour correspondre à ton thème */
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      /* Légère transparence */
+      border-top-color: #ff5722;
+      /* Couleur orange pour correspondre à ton thème */
       border-radius: 50%;
       width: 30px;
       height: 30px;
-      animation: spin 1s ease-in-out infinite; /* Spinner animé en rotation */
+      animation: spin 1s ease-in-out infinite;
+      /* Spinner animé en rotation */
     }
   </style>
 </head>
+
 <body class="bg-gray-100">
-  <div class="flex items-center justify-center h-screen">
+  <!-- <div class="flex items-center justify-center h-screen">
     <div class="text-center">
-      <!-- Le spinner -->
+     
       <div class="spinner mx-auto mb-4"></div>
-      <!-- Texte de chargement -->
+      
       <span class="text-gray-700 font-semibold text-lg">Chargement...</span>
     </div>
-  </div>
+  </div> -->
 </body>
-</html>
 
+</html>

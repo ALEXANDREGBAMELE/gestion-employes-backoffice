@@ -3,12 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './containers/default-layout/default-layout.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
-    path: 'home', component: DefaultLayoutComponent,
+    path: "auth",
+    data: { breadcrumb: 'Login' },
+    loadChildren: () => import('./views/auth/auth.module').then((m) => m.AuthModule)
+  },
+  {
+    path: '', component: DefaultLayoutComponent,
     children: [
       {
-        path: "",
+        path: "dashboard",
+        data: { breadcrumb: 'Dashbord' },
         loadChildren: () => import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
       {

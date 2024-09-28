@@ -6,10 +6,12 @@ import { UserComponent } from './user.component';
 const routes: Routes = [
   {
     path: '',
+    data: { breadcrumb: 'Users' },
     component: UserComponent,
     children: [
       {
         path: 'list',
+        data: { breadcrumb: 'Liste' },
         component: ListUserComponent,
       }
     ]

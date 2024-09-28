@@ -8,6 +8,8 @@ import { DefaultFooterComponent } from './containers/default-layout/default-foot
 import { DefaultHeaderComponent } from './containers/default-layout/default-header/default-header.component';
 import { DefaultLayoutComponent } from './containers/default-layout/default-layout.component';
 import { DefaultSideBarComponent } from './containers/default-layout/default-side-bar/default-side-bar.component';
+import { SharedModule } from './shared/shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -15,12 +17,13 @@ import { DefaultSideBarComponent } from './containers/default-layout/default-sid
     DefaultLayoutComponent,
     DefaultHeaderComponent,
     DefaultFooterComponent,
-    DefaultSideBarComponent
+    DefaultSideBarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterOutlet
+    RouterOutlet,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
