@@ -5,3 +5,33 @@
 @tailwind utilities;
 
 @import '../node_modules/flowbite/dist/flowbite.min.css';
+
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); // semi-transparent
+    z-index: 39; // Juste en dessous du drawer
+}
+
+#logo-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff; // Change selon ta charte
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    z-index: 40;
+}
+
+#logo-sidebar.closed {
+    transform: translateX(-100%); // Drawer fermé
+}
+
+#logo-sidebar.open {
+    transform: translateX(0); // Drawer ouvert
+}

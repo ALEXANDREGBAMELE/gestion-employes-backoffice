@@ -43,6 +43,43 @@ export const navData: INavData[] = [
         active: true,
     },
     {
+        title: 'Administration',
+        icon: 'ri-dashboard-horizontal-line',
+        active: true,
+        children: [
+            {
+                title: 'Direction générale',
+                url: '/users/add',
+            },
+            {
+                title: 'Département RH',
+                // url: '/users/add',
+                children: [
+                    {
+                        title: "Gestion des contract",
+                        url: '/contract/list',
+                    },
+                    {
+                        title: "Gestion des",
+                        url: '/users/add',
+                    },
+                    {
+                        title: "Gestion des",
+                        url: '/users/add',
+                    }
+                ]
+            },
+            {
+                title: 'Département informatique',
+                url: '/users/add',
+            },
+            {
+                title: 'Département finance',
+                url: '/users/add',
+            },
+        ]
+    },
+    {
         title: 'Users',
         icon: 'ri-user-add-line',
         isOpen: false,
@@ -62,12 +99,13 @@ export const navData: INavData[] = [
         title: 'Settings',
         icon: 'fas fa-cog',
         url: '/settings',
-        disabled: true, // Cet élément est désactivé
+        disabled: false, // Cet élément est désactivé
     },
     {
         title: 'Custom Action',
         icon: 'fas fa-star',
         url: '/custom',
+        disabled: true,
 
         onClick: () => {
             console.log('Custom action triggered!');

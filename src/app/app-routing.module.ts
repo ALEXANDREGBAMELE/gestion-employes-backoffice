@@ -20,6 +20,10 @@ const routes: Routes = [
       {
         path: "users",
         loadChildren: () => import('./views/user/user.module').then((m) => m.UserModule)
+      },
+      {
+        path: "contract",
+        loadChildren: () => import('./views/contrat/contrat.module').then((m) => m.ContratModule)
       }
     ]
   },

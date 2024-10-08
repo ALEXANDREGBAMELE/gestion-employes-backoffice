@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DrawerService } from 'src/app/core/services/drawer.service';
 
 @Component({
   selector: 'app-default-header',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class DefaultHeaderComponent implements OnInit {
+  constructor(private drawerService: DrawerService) { }
 
-  constructor() { }
+  toggleSidebar() {
+    this.drawerService.toggleDrawer(true); // Passe `true` pour ouvrir le sidebar
+  }
 
   ngOnInit(): void {
   }

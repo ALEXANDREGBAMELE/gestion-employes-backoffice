@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DrawerService } from 'src/app/core/services/drawer.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { navData } from '../../nav';
 @Component({
@@ -9,13 +11,44 @@ import { navData } from '../../nav';
 })
 export class DefaultSideBarComponent implements OnInit {
   public navItems = navData || null;
+  isOpen = false;
   isDarkMode = false;
-  constructor(private themeService: ThemeService) { }
+  constructor(private router: Router, private themeService: ThemeService, private drawerService: DrawerService) { }
 
   ngOnInit(): void {
     //  Vérifie si le mode sombre est activé au chargement de la page
     this.isDarkMode = this.themeService.isDarkModeEnabled();
+
+    this.drawerService.drawerState$.subscribe((isOpen: boolean) => {
+      this.isOpen = isOpen;
+    });
+
+    // this.router.events
+    //   .pipe(filter(event => event instanceof NavigationEnd))
+    //   .subscribe(() => {
+    //     this.drawerService.toggleDrawer(false); // Fermer le drawer après navigation
+    //   });
+
+    // this.router.events.subscribe((event: Event) => {
+    //   if (event instanceof NavigationStart) {
+    //     this.isOpen = false; // Ferme le drawer
+    //   }
+    // });
+
+
   }
+
+  closeDrawerOnNavigate(itemUrl: string | undefined) {
+    if (itemUrl) {
+      this.isOpen = false; // Ferme uniquement si un lien est cliqué
+    }
+  }
+
+  // Fermer le drawer en cliquant sur l'overlay
+  closeDrawer() {
+    this.isOpen = false;
+  }
+
 
   // Function to toggle dropdown
   toggleDropdown(item: any): void {

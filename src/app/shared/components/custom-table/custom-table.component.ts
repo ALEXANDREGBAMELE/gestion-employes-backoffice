@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-custom-table',
+  selector: 'custom-table',
   templateUrl: './custom-table.component.html',
 })
 export class CustomTableComponent {

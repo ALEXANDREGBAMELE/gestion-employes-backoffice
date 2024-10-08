@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { BreadcrumbService } from './breadcrumbs.service';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class NavigationListenerService {
-    constructor(private router: Router, private breadcrumbService: BreadcrumbService) {
+    constructor(private router: Router,) {
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
             .subscribe(() => {
                 // Logique pour mettre à jour les breadcrumbs selon la route actuelle
                 const breadcrumbs = this.createBreadcrumbs(this.router.routerState.root);
-                this.breadcrumbService.setBreadcrumbs(breadcrumbs);
+
             });
     }
 

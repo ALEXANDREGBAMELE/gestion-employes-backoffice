@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { DetailUserComponent } from './detail-user/detail-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
@@ -19,7 +20,8 @@ import { UserComponent } from './user.component';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    SharedModule
   ]
 })
 export class UserModule { }

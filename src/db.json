@@ -1,0 +1,129 @@
+{
+  "produits": [
+    { "id": 1, "name": "Produit A", "price": 100 },
+    { "id": 2, "name": "Produit B", "price": 200 }
+  ],
+  
+  "users":[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "username": "johndoe",
+    "email": "johndoe@example.com",
+    "address": {
+      "street": "123 Main St",
+      "suite": "Apt. 4B",
+      "city": "New York",
+      "zipcode": "10001",
+      "geo": {
+        "lat": "40.7128",
+        "lng": "-74.0060"
+      }
+    },
+    "phone": "555-1234",
+    "website": "johndoe.com",
+    "company": {
+      "name": "Doe Enterprises",
+      "catchPhrase": "Innovative solutions for a modern world",
+      "bs": "synergy, streamlining, and innovation"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "username": "janesmith",
+    "email": "janesmith@example.com",
+    "address": {
+      "street": "456 Oak St",
+      "suite": "Suite 200",
+      "city": "San Francisco",
+      "zipcode": "94105",
+      "geo": {
+        "lat": "37.7749",
+        "lng": "-122.4194"
+      }
+    },
+    "phone": "555-5678",
+    "website": "janesmith.org",
+    "company": {
+      "name": "Smith Consulting",
+      "catchPhrase": "Empowering businesses for success",
+      "bs": "consulting, strategy, and execution"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Michael Johnson",
+    "username": "michaelj",
+    "email": "michael.johnson@example.com",
+    "address": {
+      "street": "789 Elm St",
+      "suite": "Apt. 12",
+      "city": "Chicago",
+      "zipcode": "60601",
+      "geo": {
+        "lat": "41.8781",
+        "lng": "-87.6298"
+      }
+    },
+    "phone": "555-9876",
+    "website": "michaeljohnson.net",
+    "company": {
+      "name": "Johnson Tech",
+      "catchPhrase": "Pioneering the future of technology",
+      "bs": "innovation, disruption, and scalability"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Emily Davis",
+    "username": "emilyd",
+    "email": "emily.davis@example.com",
+    "address": {
+      "street": "234 Pine St",
+      "suite": "Suite 101",
+      "city": "Los Angeles",
+      "zipcode": "90001",
+      "geo": {
+        "lat": "34.0522",
+        "lng": "-118.2437"
+      }
+    },
+    "phone": "555-2468",
+    "website": "emilydavis.me",
+    "company": {
+      "name": "Davis Enterprises",
+      "catchPhrase": "Driving excellence in every project",
+      "bs": "excellence, quality, and growth"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Robert Wilson",
+    "username": "robertw",
+    "email": "robert.wilson@example.com",
+    "address": {
+      "street": "890 Birch St",
+      "suite": "Apt. 5A",
+      "city": "Seattle",
+      "zipcode": "98101",
+      "geo": {
+        "lat": "47.6062",
+        "lng": "-122.3321"
+      }
+    },
+    "phone": "555-3698",
+    "website": "robertwilson.io",
+    "company": {
+      "name": "Wilson Industries",
+      "catchPhrase": "Building the future with integrity",
+      "bs": "construction, integrity, and sustainability"
+    }
+  }
+],
+
+  "contrats": [
+    { "id": 1, "title": "Contrat 1", "userId": 1, "status": "Active" },
+    { "id": 2, "title": "Contrat 2", "userId": 2, "status": "Inactive" }
+  ]
+}

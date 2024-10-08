@@ -1,21 +1,27 @@
-<aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-60 h-screen transition-transform -translate-x-full border-gray-200 sm:translate-x-0 bg-blue-50 dark:bg-blue-50 dark:border-gray-700"
+<!-- Overlay -->
+<div *ngIf="isOpen" (click)="closeDrawer()" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+<aside [ngClass]="{
+    'translate-x-0': isOpen,
+    '-translate-x-full': !isOpen
+  }"
+    class="fixed top-0 left-0 z-40 w-60 h-screen transition-transform -translate-x-full border-gray-200 sm:translate-x-0 bg-blue-900 dark:bg-blue-900 dark:border-gray-700"
     aria-label="Sidebar">
 
     <!-- Logo section -->
-    <div class="flex items-center justify-center px-4 py-0 border-r-2 border-blue-900">
-        <a routerLink="/" class="block">
+    <div class="flex items-center justify-center px-4 py-0 ">
+        <a routerLink="/" class="block py-1">
             <img src="../../../../assets/images/icons_logos/company_logo.png" alt="Company Logo"
-                class="h-14 w-full object-contain">
+                class="h-12 w-full object-contain">
         </a>
     </div>
 
     <!-- Navigation Items -->
-    <div class="h-full px-3 pb-4 pt-4 overflow-y-auto bg-blue-900 dark:bg-blue-900">
+    <div class="h-full  pb-4 pt-4 overflow-y-auto bg-blue-900 dark:bg-blue-900">
         <ul class="space-y-2 font-medium">
             <li *ngFor="let item of navItems">
-                <a *ngIf="!item.disabled" [routerLink]="item.url"
-                    class="flex items-center gap-1 p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a *ngIf="!item.disabled" [routerLink]="item.url" (click)="closeDrawerOnNavigate(item.url)"
+                    class="flex items-center gap-1 p-2 text-gray-50  dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 group">
                     <i *ngIf="item.icon" [class]="item.icon"></i> {{ item.title }}
                     <span *ngIf="item.badge" [class]="item.badge.class">{{ item.badge.count }}</span>
 
@@ -26,14 +32,32 @@
                     </button>
                 </a>
 
-                <!-- Dropdown for children -->
+                <!-- Recursive dropdown for nested children -->
                 <ul *ngIf="item.children?.length && item.isOpen" class="space-y-2 font-medium">
                     <li *ngFor="let child of item.children">
-                        <a [routerLink]="child.url"
-                            class="flex items-center p-2 pl-8 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <a [routerLink]="child.url" (click)="closeDrawerOnNavigate(child.url)"
+                            class="flex items-center p-2 pl-8 text-gray-50  dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 groupp">
                             <i *ngIf="child.icon" [class]="child.icon"></i> {{ child.title }}
                             <span *ngIf="child.badge" [class]="child.badge.class">{{ child.badge.count }}</span>
+
+                            <!-- Toggle button for nested dropdown if child has its own children -->
+                            <button *ngIf="child.children?.length" (click)="toggleDropdown(child)" type="button"
+                                class="ml-auto text-gray-400 hover:text-gray-500 dark:hover:text-white">
+                                <i [class]="child.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
+                            </button>
                         </a>
+
+                        <!-- Recursive dropdown for further nested children -->
+                        <ul *ngIf="child.children?.length && child.isOpen" class="space-y-2 font-medium">
+                            <li *ngFor="let subChild of child.children">
+                                <a [routerLink]="subChild.url" (click)="closeDrawerOnNavigate(subChild.url)"
+                                    class="flex items-center p-2 pl-11 text-gray-50  dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 group">
+                                    <i *ngIf="subChild.icon" [class]="subChild.icon"></i> {{ subChild.title }}
+                                    <span *ngIf="subChild.badge" [class]="subChild.badge.class">{{ subChild.badge.count
+                                        }}</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </li>
