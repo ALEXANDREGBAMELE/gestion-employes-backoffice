@@ -17,11 +17,12 @@
     </div>
 
     <!-- Navigation Items -->
-    <div class="h-full  pb-4 pt-4 overflow-y-auto bg-blue-900 dark:bg-blue-900">
+    <div class="h-full pb-4 pt-4 overflow-y-auto bg-blue-900 dark:bg-blue-900">
         <ul class="space-y-2 font-medium">
             <li *ngFor="let item of navItems">
-                <a *ngIf="!item.disabled" [routerLink]="item.url" (click)="closeDrawerOnNavigate(item.url)"
-                    class="flex items-center gap-1 p-2 text-gray-50  dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 group">
+                <a *ngIf="!item.disabled" [routerLink]="item.url" routerLinkActive="active"
+                    (click)="closeDrawerOnNavigate(item.url)"
+                    class="flex items-center gap-1 p-2 text-gray-50 dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 group">
                     <i *ngIf="item.icon" [class]="item.icon"></i> {{ item.title }}
                     <span *ngIf="item.badge" [class]="item.badge.class">{{ item.badge.count }}</span>
 
@@ -32,11 +33,11 @@
                     </button>
                 </a>
 
-                <!-- Recursive dropdown for nested children -->
+                <!-- Recursive dropdown for nested children (Level 1) -->
                 <ul *ngIf="item.children?.length && item.isOpen" class="space-y-2 font-medium">
                     <li *ngFor="let child of item.children">
-                        <a [routerLink]="child.url" (click)="closeDrawerOnNavigate(child.url)"
-                            class="flex items-center p-2 pl-8 text-gray-50  dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 groupp">
+                        <a [routerLink]="child.url" routerLinkActive="active" (click)="closeDrawerOnNavigate(child.url)"
+                            class="flex items-center p-2 pl-8 text-gray-50 dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 group">
                             <i *ngIf="child.icon" [class]="child.icon"></i> {{ child.title }}
                             <span *ngIf="child.badge" [class]="child.badge.class">{{ child.badge.count }}</span>
 
@@ -47,15 +48,64 @@
                             </button>
                         </a>
 
-                        <!-- Recursive dropdown for further nested children -->
+                        <!-- Recursive dropdown for Level 2 -->
                         <ul *ngIf="child.children?.length && child.isOpen" class="space-y-2 font-medium">
                             <li *ngFor="let subChild of child.children">
-                                <a [routerLink]="subChild.url" (click)="closeDrawerOnNavigate(subChild.url)"
-                                    class="flex items-center p-2 pl-11 text-gray-50  dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 group">
+                                <a [routerLink]="subChild.url" routerLinkActive="active"
+                                    (click)="closeDrawerOnNavigate(subChild.url)"
+                                    class="flex items-center p-2 pl-11 text-gray-50 dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 group">
                                     <i *ngIf="subChild.icon" [class]="subChild.icon"></i> {{ subChild.title }}
                                     <span *ngIf="subChild.badge" [class]="subChild.badge.class">{{ subChild.badge.count
                                         }}</span>
+
+                                    <!-- Toggle button for Level 3 -->
+                                    <button *ngIf="subChild.children?.length" (click)="toggleDropdown(subChild)"
+                                        type="button"
+                                        class="ml-auto text-gray-400 hover:text-gray-500 dark:hover:text-white">
+                                        <i
+                                            [class]="subChild.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
+                                    </button>
                                 </a>
+
+                                <!-- Recursive dropdown for Level 4 -->
+                                <ul *ngIf="subChild.children?.length && subChild.isOpen" class="space-y-2 font-medium">
+                                    <li *ngFor="let fourthChild of subChild.children">
+                                        <a [routerLink]="fourthChild.url" routerLinkActive="active"
+                                            (click)="closeDrawerOnNavigate(fourthChild.url)"
+                                            class="flex items-center p-2 pl-14 text-gray-50 dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 group">
+                                            <i *ngIf="fourthChild.icon" [class]="fourthChild.icon"></i> {{
+                                            fourthChild.title
+                                            }}
+                                            <span *ngIf="fourthChild.badge" [class]="fourthChild.badge.class">{{
+                                                fourthChild.badge.count
+                                                }}</span>
+
+                                            <!-- Toggle button for Level 5 -->
+                                            <button *ngIf="fourthChild.children?.length"
+                                                (click)="toggleDropdown(fourthChild)" type="button"
+                                                class="ml-auto text-gray-400 hover:text-gray-500 dark:hover:text-white">
+                                                <i
+                                                    [class]="fourthChild.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
+                                            </button>
+                                        </a>
+
+                                        <!-- Recursive dropdown for Level 5 -->
+                                        <ul *ngIf="fourthChild.children?.length && fourthChild.isOpen"
+                                            class="space-y-2 font-medium">
+                                            <li *ngFor="let fifthChild of fourthChild.children">
+                                                <a [routerLink]="fifthChild.url" routerLinkActive="active"
+                                                    (click)="closeDrawerOnNavigate(fifthChild.url)"
+                                                    class="flex items-center p-2 pl-17 text-gray-50 dark:text-white hover:bg-blue-500 hover:text-white dark:hover:bg-gray-700 group">
+                                                    <i *ngIf="fifthChild.icon" [class]="fifthChild.icon"></i> {{
+                                                    fifthChild.title }}
+                                                    <span *ngIf="fifthChild.badge" [class]="fifthChild.badge.class">{{
+                                                        fifthChild.badge.count
+                                                        }}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -63,6 +113,7 @@
             </li>
         </ul>
     </div>
+
 
     <!-- Theme Toggle Button (fixed at the bottom) -->
     <div class="absolute bottom-4 w-full px-4">

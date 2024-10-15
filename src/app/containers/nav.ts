@@ -56,17 +56,10 @@ export const navData: INavData[] = [
                 // url: '/users/add',
                 children: [
                     {
-                        title: "Gestion des contract",
+                        title: "Contract",
                         url: '/contract/list',
                     },
-                    {
-                        title: "Gestion des",
-                        url: '/users/add',
-                    },
-                    {
-                        title: "Gestion des",
-                        url: '/users/add',
-                    }
+
                 ]
             },
             {

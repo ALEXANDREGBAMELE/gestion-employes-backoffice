@@ -3,15 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './containers/default-layout/default-layout.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
   {
-    path: "auth",
+    path: "",
     data: { breadcrumb: 'Login' },
     loadChildren: () => import('./views/auth/auth.module').then((m) => m.AuthModule)
   },
   {
-    path: '', component: DefaultLayoutComponent,
+    path: "", component: DefaultLayoutComponent,
     children: [
+      { path: "", redirectTo: 'dashboard', pathMatch: 'full' },
       {
         path: "dashboard",
         data: { breadcrumb: 'Dashbord' },

@@ -21,7 +21,8 @@ export class CustomInputComponent implements ControlValueAccessor {
   @Input() iconRightClickable: boolean = false;
   @Input() disabled: boolean = false;
   @Input() required: boolean = false;
-
+  @Input() label: string = 'Libelle';
+  @Input() inputId: string = `input-${Math.random().toString(36).substr(2, 9)}`;
   value: string = '';
   onChange = (value: string) => { };
   onTouch = () => { };
