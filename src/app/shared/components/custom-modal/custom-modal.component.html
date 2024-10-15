@@ -1,10 +1,31 @@
-<div>
-    <div class="modal-footer"></div>
-    <div class="modal-footer">
-        <ng-container></ng-container>
-    </div>
-    <div class="modal-footer">
-        <custom-button [value]="'Non'"></custom-button>
-        <custom-button [value]="'Oui'"></custom-button>
+<div *ngIf="isOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-1/3">
+        <!-- Header du modal -->
+        <div class="px-4 py-2 border-b flex justify-between items-center">
+            <h2 class="text-lg font-bold">{{ header }}</h2>
+            <button (click)="onClose()" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                <!-- Icône de fermeture (ici une croix SVG) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Corps du modal -->
+        <div class="px-4 py-4">
+            <ng-content></ng-content> <!-- Contenu dynamique ici -->
+        </div>
+
+        <!-- Pied de page du modal -->
+        <div class="px-4 py-2 border-t flex justify-end">
+            <button *ngFor="let button of footerButtons" (click)="button.action()"
+                class="bg-blue-500 text-white py-1 px-3 rounded-md mx-1">
+                {{ button.label }}
+            </button>
+            <button (click)="onClose()" class="bg-gray-300 text-gray-700 py-1 px-3 rounded-md mx-1">
+                Annuler
+            </button>
+        </div>
     </div>
 </div>

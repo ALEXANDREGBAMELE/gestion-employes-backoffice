@@ -1,64 +1,64 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'custom-input',
   templateUrl: './custom-input.component.html',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: CustomInputComponent,
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CustomInputComponent),
+      multi: true
+    }
+  ]
 })
-export class CustomInputComponent {
+export class CustomInputComponent implements ControlValueAccessor {
+  @Input() type: string = 'text';
+  @Input() placeholder: string = '';
+  @Input() iconLeft?: string;
+  @Input() iconRight?: string;
+  @Input() iconLeftClickable: boolean = false;
+  @Input() iconRightClickable: boolean = false;
+  @Input() disabled: boolean = false;
+  @Input() required: boolean = false;
 
-// Propriétés d'entrée pour configurer l'input
-@Input() placeholder: string = '';           // Placeholder de l'input
-@Input() type: string = 'text';              // Type de l'input (text, password, email, etc.)
-@Input() iconLeft: string | null = null;     // Icône à gauche
-@Input() iconRight: string | null = null;    // Icône à droite
-@Input() iconLeftClickable: boolean = false; // L'icône gauche est-elle cliquable ?
-@Input() iconRightClickable: boolean = false;// L'icône droite est-elle cliquable ?
-@Input() disabled: boolean = false;          // Input désactivé
-@Input() required: boolean = false;          // Champ obligatoire
+  value: string = '';
+  onChange = (value: string) => { };
+  onTouch = () => { };
 
-@Output() iconLeftClick = new EventEmitter<void>();  // Événement pour icône gauche
-@Output() iconRightClick = new EventEmitter<void>(); // Événement pour icône droite
-
-value: string = '';
-
-// Méthodes pour gérer la valeur de l'input
-onChange = (_: any) => {};
-onTouch = () => {};
-
- // Gestion des événements de l'input
- writeValue(value: any): void {
-  this.value = value;
-}
-
-registerOnChange(fn: any): void {
-  this.onChange = fn;
-}
-
-registerOnTouched(fn: any): void {
-  this.onTouch = fn;
-}
-
-setDisabledState(isDisabled: boolean): void {
-  this.disabled = isDisabled;
-}
-
-// Gestion des clics sur les icônes
-onIconLeftClick(): void {
-  if (this.iconLeftClickable) {
-    this.iconLeftClick.emit();
+  writeValue(value: string): void {
+    this.value = value;
   }
-}
 
-onIconRightClick(): void {
-  if (this.iconRightClickable) {
-    this.iconRightClick.emit();
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
   }
-}
 
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+
+  // Méthodes pour les icônes cliquables
+  onIconLeftClick() {
+    if (this.iconLeftClickable) {
+      console.log('Icône gauche cliquée');
+    }
+  }
+
+  onIconRightClick() {
+    if (this.iconRightClickable) {
+      console.log('Icône droite cliquée');
+    }
+  }
+
+  // Ajouter une méthode pour traiter les changements
+  handleInputChange(event: Event) {
+    const input = event.target as HTMLInputElement; // Spécifiez le type d'élément
+    this.value = input.value; // Mettez à jour la valeur
+    this.onChange(this.value); // Appelez la fonction onChange
+  }
 }

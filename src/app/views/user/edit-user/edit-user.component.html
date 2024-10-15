@@ -1,1 +1,36 @@
-<p>edit-user works!</p>
+<div class="container mx-auto p-4">
+    <!-- <h1 class="text-2xl font-bold mb-4">{{ selectedUserId ? 'Modifier' : 'Ajouter' }} un Utilisateur</h1> -->
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
+            <input id="name" formControlName="name" type="text"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+            <div *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched" class="text-red-500 text-sm">Nom
+                requis</div>
+        </div>
+
+        <div class="mb-4">
+            <label for="username" class="block text-sm font-medium text-gray-700">Nom d'utilisateur</label>
+            <input id="username" formControlName="username" type="text"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+            <div *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched"
+                class="text-red-500 text-sm">Nom d'utilisateur requis</div>
+        </div>
+
+        <div class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+            <input id="email" formControlName="email" type="email"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+            <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-red-500 text-sm">
+                Email requis</div>
+        </div>
+
+        <!-- <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            {{ selectedUserId ? 'Mettre à jour' : 'Ajouter' }}
+        </button>
+        <button type="button" (click)="resetForm()"
+            class="bg-gray-300 text-black py-2 px-4 rounded-md hover:bg-gray-400 ml-2">
+            Annuler
+        </button> -->
+    </form>
+</div>

@@ -1,0 +1,490 @@
+{
+  "produits": [
+    {
+      "id": 1,
+      "name": "Produit A",
+      "price": 100
+    },
+    {
+      "id": 2,
+      "name": "Produit B",
+      "price": 200
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "username": "johndoe",
+      "email": "johndoe@example.com",
+      "address": {
+        "street": "123 Main St",
+        "suite": "Apt. 4B",
+        "city": "New York",
+        "zipcode": "10001",
+        "geo": {
+          "lat": "40.7128",
+          "lng": "-74.0060"
+        }
+      },
+      "phone": "555-1234",
+      "website": "johndoe.com",
+      "company": {
+        "name": "Doe Enterprises",
+        "catchPhrase": "Innovative solutions for a modern world",
+        "bs": "synergy, streamlining, and innovation"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "username": "janesmith",
+      "email": "janesmith@example.com",
+      "address": {
+        "street": "456 Oak St",
+        "suite": "Suite 200",
+        "city": "San Francisco",
+        "zipcode": "94105",
+        "geo": {
+          "lat": "37.7749",
+          "lng": "-122.4194"
+        }
+      },
+      "phone": "555-5678",
+      "website": "janesmith.org",
+      "company": {
+        "name": "Smith Consulting",
+        "catchPhrase": "Empowering businesses for success",
+        "bs": "consulting, strategy, and execution"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Michael Johnson",
+      "username": "michaelj",
+      "email": "michael.johnson@example.com",
+      "address": {
+        "street": "789 Elm St",
+        "suite": "Apt. 12",
+        "city": "Chicago",
+        "zipcode": "60601",
+        "geo": {
+          "lat": "41.8781",
+          "lng": "-87.6298"
+        }
+      },
+      "phone": "555-9876",
+      "website": "michaeljohnson.net",
+      "company": {
+        "name": "Johnson Tech",
+        "catchPhrase": "Pioneering the future of technology",
+        "bs": "innovation, disruption, and scalability"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Emily Davis",
+      "username": "emilyd",
+      "email": "emily.davis@example.com",
+      "address": {
+        "street": "234 Pine St",
+        "suite": "Suite 101",
+        "city": "Los Angeles",
+        "zipcode": "90001",
+        "geo": {
+          "lat": "34.0522",
+          "lng": "-118.2437"
+        }
+      },
+      "phone": "555-2468",
+      "website": "emilydavis.me",
+      "company": {
+        "name": "Davis Enterprises",
+        "catchPhrase": "Driving excellence in every project",
+        "bs": "excellence, quality, and growth"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Robert Wilson",
+      "username": "robertw",
+      "email": "robert.wilson@example.com",
+      "address": {
+        "street": "890 Birch St",
+        "suite": "Apt. 5A",
+        "city": "Seattle",
+        "zipcode": "98101",
+        "geo": {
+          "lat": "47.6062",
+          "lng": "-122.3321"
+        }
+      },
+      "phone": "555-3698",
+      "website": "robertwilson.io",
+      "company": {
+        "name": "Wilson Industries",
+        "catchPhrase": "Building the future with integrity",
+        "bs": "construction, integrity, and sustainability"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Alice Brown",
+      "username": "aliceb",
+      "email": "alice.brown@example.com",
+      "address": {
+        "street": "567 Maple St",
+        "suite": "Apt. 9C",
+        "city": "Miami",
+        "zipcode": "33101",
+        "geo": {
+          "lat": "25.7617",
+          "lng": "-80.1918"
+        }
+      },
+      "phone": "555-7410",
+      "website": "alicebrown.org",
+      "company": {
+        "name": "Brown Solutions",
+        "catchPhrase": "Solving problems with precision",
+        "bs": "precision, reliability, and efficiency"
+      }
+    },
+    {
+      "id": 7,
+      "name": "William Turner",
+      "username": "willturner",
+      "email": "william.turner@example.com",
+      "address": {
+        "street": "789 Spruce St",
+        "suite": "Apt. 3D",
+        "city": "Houston",
+        "zipcode": "77002",
+        "geo": {
+          "lat": "29.7604",
+          "lng": "-95.3698"
+        }
+      },
+      "phone": "555-8520",
+      "website": "willturner.com",
+      "company": {
+        "name": "Turner Innovations",
+        "catchPhrase": "Innovating for a better tomorrow",
+        "bs": "creativity, innovation, and growth"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Sophia Martinez",
+      "username": "sophiam",
+      "email": "sophia.martinez@example.com",
+      "address": {
+        "street": "345 Cedar St",
+        "suite": "Apt. 7E",
+        "city": "Phoenix",
+        "zipcode": "85001",
+        "geo": {
+          "lat": "33.4484",
+          "lng": "-112.0740"
+        }
+      },
+      "phone": "555-9630",
+      "website": "sophiamartinez.org",
+      "company": {
+        "name": "Martinez Enterprises",
+        "catchPhrase": "Empowering businesses to thrive",
+        "bs": "empowerment, growth, and success"
+      }
+    },
+    {
+      "id": 9,
+      "name": "James Harris",
+      "username": "jamesh",
+      "email": "james.harris@example.com",
+      "address": {
+        "street": "567 Redwood St",
+        "suite": "Suite 6F",
+        "city": "Denver",
+        "zipcode": "80202",
+        "geo": {
+          "lat": "39.7392",
+          "lng": "-104.9903"
+        }
+      },
+      "phone": "555-1590",
+      "website": "jamesharris.net",
+      "company": {
+        "name": "Harris Tech",
+        "catchPhrase": "Leading the way in tech innovation",
+        "bs": "technology, disruption, and growth"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Olivia Thompson",
+      "username": "oliviath",
+      "email": "olivia.thompson@example.com",
+      "address": {
+        "street": "890 Willow St",
+        "suite": "Suite 8G",
+        "city": "Boston",
+        "zipcode": "02108",
+        "geo": {
+          "lat": "42.3601",
+          "lng": "-71.0589"
+        }
+      },
+      "phone": "555-7530",
+      "website": "oliviathompson.io",
+      "company": {
+        "name": "Thompson Industries",
+        "catchPhrase": "Innovating industries worldwide",
+        "bs": "global, innovation, and success"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Mason Lee",
+      "username": "masonl",
+      "email": "mason.lee@example.com",
+      "address": {
+        "street": "123 Cypress St",
+        "suite": "Apt. 5D",
+        "city": "Dallas",
+        "zipcode": "75201",
+        "geo": {
+          "lat": "32.7767",
+          "lng": "-96.7970"
+        }
+      },
+      "phone": "555-3698",
+      "website": "masonlee.com",
+      "company": {
+        "name": "Lee Enterprises",
+        "catchPhrase": "Excellence in every solution",
+        "bs": "excellence, leadership, and growth"
+      }
+    },
+    {
+      "id": 12,
+      "name": "Charlotte Clark",
+      "username": "charlottec",
+      "email": "charlotte.clark@example.com",
+      "address": {
+        "street": "567 Aspen St",
+        "suite": "Apt. 9B",
+        "city": "Austin",
+        "zipcode": "78701",
+        "geo": {
+          "lat": "30.2672",
+          "lng": "-97.7431"
+        }
+      },
+      "phone": "555-4567",
+      "website": "charlotteclark.io",
+      "company": {
+        "name": "Clark Consulting",
+        "catchPhrase": "Providing clarity through consulting",
+        "bs": "consulting, analysis, and success"
+      }
+    },
+    {
+      "id": 13,
+      "name": "Henry Walker",
+      "username": "henryw",
+      "email": "henry.walker@example.com",
+      "address": {
+        "street": "345 Hickory St",
+        "suite": "Suite 3C",
+        "city": "Philadelphia",
+        "zipcode": "19102",
+        "geo": {
+          "lat": "39.9526",
+          "lng": "-75.1652"
+        }
+      },
+      "phone": "555-2345",
+      "website": "henrywalker.org",
+      "company": {
+        "name": "Walker Innovations",
+        "catchPhrase": "Innovation at its finest",
+        "bs": "innovation, excellence, and growth"
+      }
+    },
+    {
+      "id": 14,
+      "name": "Isabella Lewis",
+      "username": "isabellal",
+      "email": "isabella.lewis@example.com",
+      "address": {
+        "street": "789 Fir St",
+        "suite": "Apt. 7F",
+        "city": "San Diego",
+        "zipcode": "92101",
+        "geo": {
+          "lat": "32.7157",
+          "lng": "-117.1611"
+        }
+      },
+      "phone": "555-7890",
+      "website": "isabellalewis.net",
+      "company": {
+        "name": "Lewis Enterprises",
+        "catchPhrase": "Exceeding expectations every time",
+        "bs": "excellence, precision, and success"
+      }
+    },
+    {
+      "id": 15,
+      "name": "Liam Robinson",
+      "username": "liamr",
+      "email": "liam.robinson@example.com",
+      "address": {
+        "street": "123 Palm St",
+        "suite": "Suite 4B",
+        "city": "Orlando",
+        "zipcode": "32801",
+        "geo": {
+          "lat": "28.5383",
+          "lng": "-81.3792"
+        }
+      },
+      "phone": "555-6789",
+      "website": "liamrobinson.io",
+      "company": {
+        "name": "Robinson Solutions",
+        "catchPhrase": "Solving problems, creating success",
+        "bs": "solutions, efficiency, and reliability"
+      }
+    },
+    {
+      "id": 16,
+      "name": "Mia Scott",
+      "username": "mias",
+      "email": "mia.scott@example.com",
+      "address": {
+        "street": "345 Cherry St",
+        "suite": "Apt. 2C",
+        "city": "Las Vegas",
+        "zipcode": "89101",
+        "geo": {
+          "lat": "36.1699",
+          "lng": "-115.1398"
+        }
+      },
+      "phone": "555-8901",
+      "website": "miacscott.org",
+      "company": {
+        "name": "Scott Consulting",
+        "catchPhrase": "Consulting for a better tomorrow",
+        "bs": "consulting, planning, and execution"
+      }
+    },
+    {
+      "id": 17,
+      "name": "Elijah Green",
+      "username": "elijahg",
+      "email": "elijah.green@example.com",
+      "address": {
+        "street": "567 Walnut St",
+        "suite": "Apt. 5A",
+        "city": "Portland",
+        "zipcode": "97201",
+        "geo": {
+          "lat": "45.5051",
+          "lng": "-122.6750"
+        }
+      },
+      "phone": "555-1234",
+      "website": "elijahgreen.com",
+      "company": {
+        "name": "Green Innovations",
+        "catchPhrase": "Sustainability through innovation",
+        "bs": "sustainability, growth, and impact"
+      }
+    },
+    {
+      "id": 18,
+      "name": "Ava Anderson",
+      "username": "avaa",
+      "email": "ava.anderson@example.com",
+      "address": {
+        "street": "789 Willow St",
+        "suite": "Apt. 7E",
+        "city": "Atlanta",
+        "zipcode": "30301",
+        "geo": {
+          "lat": "33.7490",
+          "lng": "-84.3880"
+        }
+      },
+      "phone": "555-4567",
+      "website": "avaanderson.org",
+      "company": {
+        "name": "Anderson Enterprises",
+        "catchPhrase": "Delivering excellence at scale",
+        "bs": "scalability, efficiency, and success"
+      }
+    },
+    {
+      "id": 19,
+      "name": "Oliver Miller",
+      "username": "oliverm",
+      "email": "oliver.miller@example.com",
+      "address": {
+        "street": "123 Pine St",
+        "suite": "Suite 2B",
+        "city": "Nashville",
+        "zipcode": "37201",
+        "geo": {
+          "lat": "36.1627",
+          "lng": "-86.7816"
+        }
+      },
+      "phone": "555-7890",
+      "website": "olivermiller.io",
+      "company": {
+        "name": "Miller Solutions",
+        "catchPhrase": "Innovating for a brighter future",
+        "bs": "innovation, excellence, and growth"
+      }
+    },
+    {
+      "id": 20,
+      "name": "Charlotte Young",
+      "username": "charlotty",
+      "email": "charlotte.young@example.com",
+      "address": {
+        "street": "456 Oak St",
+        "suite": "Apt. 4C",
+        "city": "San Jose",
+        "zipcode": "95112",
+        "geo": {
+          "lat": "37.7749",
+          "lng": "-122.4194"
+        }
+      },
+      "phone": "555-3210",
+      "website": "charlotteyoung.io",
+      "company": {
+        "name": "Young Enterprises",
+        "catchPhrase": "Empowering change through innovation",
+        "bs": "leadership, creativity, and success"
+      }
+    }
+  ],
+  "contrats": [
+    {
+      "id": 1,
+      "title": "Contrat 1",
+      "userId": 1,
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "title": "Contrat 2",
+      "userId": 2,
+      "status": "Inactive"
+    }
+  ]
+}

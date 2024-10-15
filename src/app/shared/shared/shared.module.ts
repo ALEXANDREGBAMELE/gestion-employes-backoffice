@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderService } from '../../core/services/loader.service';
 import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.component';
 import { CustomButtonSelectComponent } from '../components/custom-button-select/custom-button-select.component';
@@ -36,7 +37,8 @@ const sharedComponents = [
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
+    ReactiveFormsModule
   ],
   exports: [
     ...sharedComponents
