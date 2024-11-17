@@ -1,7 +1,7 @@
 <app-default-header></app-default-header>
-<app-default-side-bar></app-default-side-bar>
-<div class="p-0 sm:ml-60 dark:bg-gray-800">
-   <div class="px-2 pb-2 shadow dark:border-gray-700 mt-20 pt-4 ">
+<app-default-side-bar *ngIf="isSidebarOpen"></app-default-side-bar>
+<div [ngClass]="isFullScreen ? 'tw-ml-60' : 'tw-ml-0'" class="tw-p-0 sm:tw-ml-60 tw-dark:bg-gray-800">
+   <div class="tw-px-2 tw-pb-2 tw-shadow tw-dark:border-gray-700 tw-mt-20 tw-pt-4">
       <router-outlet></router-outlet>
    </div>
 </div>

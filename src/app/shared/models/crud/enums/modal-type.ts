@@ -1,0 +1,15 @@
+export enum ModalType {
+    Default = '',
+    Size65 = 'gray modal-lg modal-width-65',
+    Size60 = 'gray modal-lg modal-width-60',
+    Size55 = 'gray modal-lg modal-width-55',
+    Size50 = 'gray modal-lg modal-width-45',
+    Size45 = 'gray modal-lg modal-width-45',
+    Size40 = 'gray modal-lg modal-width-40',
+    Size35 = 'gray modal-lg modal-width-35',
+    Size30 = 'gray modal-lg modal-width-30',
+    Size25 = 'gray modal-lg modal-width-25',
+    Size20 = 'gray modal-lg modal-width-20',
+    Size15 = 'gray modal-lg modal-width-15',
+    Size10 = 'gray modal-lg modal-width-10',
+}

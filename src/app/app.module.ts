@@ -12,7 +12,7 @@ import { DefaultHeaderComponent } from './containers/default-layout/default-head
 import { DefaultLayoutComponent } from './containers/default-layout/default-layout.component';
 import { DefaultSideBarComponent } from './containers/default-layout/default-side-bar/default-side-bar.component';
 import { HttpErrorInterceptor } from './core/interceptors/error.interceptor';
-import { SharedModule } from './shared/shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 import { UserState } from './store/states/user.state';
 
 

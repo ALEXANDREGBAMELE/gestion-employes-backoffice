@@ -1,0 +1,26 @@
+/* Styles spécifiques pour le select */
+select {
+  @apply tw-h-10; /* Ajuste la hauteur du sélecteur */
+
+  /* Masquer les icônes de dropdown par défaut */
+  -webkit-appearance: none; /* Chrome, Safari, Opera */
+  -moz-appearance: none; /* Firefox */
+  appearance: none; /* Autres navigateurs */
+  
+  /* Ajout d'une bordure orange et ajustement de la couleur */
+  border-color: #FF3C00; /* Couleur de bordure */
+  
+  /* Ajouter un padding pour le texte */
+  padding-right: 2.5rem; /* Ajuster en fonction de la taille de l'icône personnalisée si utilisée */
+  
+  /* Optionnel : Ajouter des styles pour l'effet focus */
+  &:focus {
+    border-color: #FF3C00; /* Couleur de la bordure au focus */
+    box-shadow: 0 0 0 2px rgba(255, 60, 0, 0.2); /* Ombre au focus */
+  }
+}
+
+/* Styles pour l'icône personnalisée si ajoutée plus tard */
+.tw-select-icon {
+  @apply tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-pr-2;
+}

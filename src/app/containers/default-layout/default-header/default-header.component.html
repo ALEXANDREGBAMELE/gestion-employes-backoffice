@@ -1,61 +1,75 @@
 <nav
-  class="fixed top-0 z-40 w-full bg-white shadow border-gray-200 dark:bg-gray-700 dark:border-gray-700 sm:pl-60 md:pl-60 lg:pl-60 xl:pl-60">
-  <div class="px-3 py-3 lg:px-5 lg:pl-3">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center justify-start rtl:justify-end">
+  class="tw-fixed tw-top-0 tw-z-40 tw-w-full tw-bg-white tw-shadow tw-border-gray-200 tw-dark:bg-gray-700 tw-dark:border-gray-700"
+  [ngClass]="isFullScreen ? 'tw-ml-60' : 'tw-ml-0'">
+  <div class="tw-px-3 tw-py-3 lg:tw-px-5 lg:tw-pl-3">
+    <div class="tw-flex tw-items-center tw-justify-between">
+      <!-- Logo & Sidebar Toggle -->
+      <div class="tw-hidden sm:tw-inline-flex tw-items-center">
+        <span>
+          <button (click)="toggleIcon()"
+            class="tw-inline-flex tw-items-center tw-px-2 tw-me-2 tw-text-sm tw-text-gray-500 tw-rounded tw-hover:bg-gray-100">
+            <i [ngClass]="isLeftIconVisible ? 'ri-arrow-left-wide-line' : 'ri-arrow-right-wide-line'"></i>
+          </button>
+        </span>
+        <span class="tw-font-semibold tw-text-gray-800 tw-dark:text-white">Logo</span>
+      </div>
+
+      <!-- Mobile Sidebar Button -->
+      <div class="tw-flex tw-items-center tw-justify-start tw-rtl:tw-justify-end">
         <button type="button" (click)="toggleSidebar()"
-          class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-          <span class="sr-only">Open sidebar</span>
-          <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+          class="tw-inline-flex tw-items-center tw-p-2 tw-text-sm tw-text-gray-500 tw-rounded-lg sm:tw-hidden tw-hover:bg-gray-100 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-gray-200 tw-dark:text-gray-400 tw-dark:hover:bg-gray-700 tw-dark:focus:tw-ring-gray-600">
+          <span class="tw-sr-only">Open sidebar</span>
+          <svg class="tw-w-6 tw-h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
             <path clip-rule="evenodd" fill-rule="evenodd"
               d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
             </path>
           </svg>
         </button>
-
       </div>
-      <div class="flex items-center">
-        <div class="flex items-center ms-3">
+
+      <!-- User Menu -->
+      <div class="tw-flex tw-items-center">
+        <div class="tw-flex tw-items-center tw-ms-3">
           <div>
             <button type="button"
-              class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              class="tw-flex tw-text-sm tw-bg-gray-800 tw-rounded-full focus:tw-ring-4 focus:tw-ring-gray-300 tw-dark:focus:tw-ring-gray-600"
               aria-expanded="false" data-dropdown-toggle="dropdown-user">
-              <span class="sr-only">Open user menu</span>
-              <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                alt="user photo">
+              <span class="tw-sr-only">Open user menu</span>
+              <img class="tw-w-8 tw-h-8 tw-rounded-full"
+                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
             </button>
           </div>
           <div
-            class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+            class="tw-z-50 tw-hidden tw-my-4 tw-text-base tw-list-none tw-bg-white tw-divide-y tw-divide-gray-100 tw-rounded tw-shadow tw-dark:bg-gray-700 tw-dark:divide-gray-600"
             id="dropdown-user">
-            <div class="px-4 py-3" role="none">
-              <p class="text-sm text-gray-900 dark:text-white" role="none">
+            <div class="tw-px-4 tw-py-3" role="none">
+              <p class="tw-text-sm tw-text-gray-900 tw-dark:text-white" role="none">
                 Neil Sims
               </p>
-              <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                {{"neil.sims@flflowbite.com"}}
+              <p class="tw-text-sm tw-font-medium tw-text-gray-900 tw-truncate tw-dark:text-gray-300" role="none">
+                {{ "neil.sims@flowbite.com" }}
               </p>
             </div>
-            <ul class="py-1" role="none">
+            <ul class="tw-py-1" role="none">
               <li>
                 <a href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 tw-hover:bg-gray-100 tw-dark:text-gray-300 tw-dark:hover:bg-gray-600 tw-dark:hover:text-white"
                   role="menuitem">Dashboard</a>
               </li>
               <li>
                 <a href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 tw-hover:bg-gray-100 tw-dark:text-gray-300 tw-dark:hover:bg-gray-600 tw-dark:hover:text-white"
                   role="menuitem">Settings</a>
               </li>
               <li>
                 <a href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 tw-hover:bg-gray-100 tw-dark:text-gray-300 tw-dark:hover:bg-gray-600 tw-dark:hover:text-white"
                   role="menuitem">Earnings</a>
               </li>
               <li>
                 <a href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                  class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 tw-hover:bg-gray-100 tw-dark:text-gray-300 tw-dark:hover:bg-gray-600 tw-dark:hover:text-white"
                   role="menuitem">Sign out</a>
               </li>
             </ul>

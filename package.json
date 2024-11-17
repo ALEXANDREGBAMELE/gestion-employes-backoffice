@@ -21,6 +21,8 @@
     "@angular/router": "^14.2.0",
     "@ngxs/store": "^3.7.4",
     "autoprefixer": "^10.4.20",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "flowbite": "^2.5.1",
     "ngx-toastr": "^14.3.0",
     "postcss": "^8.4.47",

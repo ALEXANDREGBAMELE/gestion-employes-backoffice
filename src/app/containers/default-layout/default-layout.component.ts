@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LayoutService } from 'src/app/core/services/layout.service';
 
 @Component({
   selector: 'app-default-layout',
@@ -7,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class DefaultLayoutComponent implements OnInit {
+  constructor(private layoutService: LayoutService) { }
 
-  constructor() { }
+  isSidebarOpen = true;
+  isFullScreen = true;
 
-  ngOnInit(): void {
+
+  ngOnInit() {
+    // this.layoutService.isSidebarOpen$.subscribe(open => {
+    //   this.isSidebarOpen = open;
+    // });
+
+    // this.layoutService.isFullScreen$.subscribe(fullScreen => {
+    //   this.isFullScreen = fullScreen;
+    // });
   }
 
 }

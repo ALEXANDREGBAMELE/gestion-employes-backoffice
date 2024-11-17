@@ -1,1 +1,34 @@
-<p>custom-input-select works!</p>
+<div class="relative w-full">
+    <div (click)="toggleDropdown()"
+        class="select-box flex items-center justify-between p-2 border border-gray-300 rounded-md cursor-pointer shadow-sm hover:border-gray-400">
+
+        <span *ngIf="selectedOption; else placeholderContent">
+            {{ selectedOption[labelKey] }}
+        </span>
+
+        <ng-template #placeholderContent>
+            <span class="placeholder text-gray-500">{{ placeholder }}</span>
+        </ng-template>
+
+        <svg class="w-4 h-4 ml-2 transition-transform transform" [ngClass]="{'rotate-180': isOpen}" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </div>
+
+    <div *ngIf="isOpen" class="dropdown absolute z-10 w-full mt-2 bg-white border border-gray-300 rounded-md shadow-lg">
+        <!-- Search Box -->
+        <div *ngIf="allowSearch" class="p-2 border-b border-gray-200">
+            <input type="text" (input)="filterOptions()" placeholder="Search..."
+                class="search-input w-full p-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <!-- Options List -->
+        <ul class="options-list max-h-60 overflow-y-auto">
+            <li *ngFor="let option of filteredOptions" (click)="selectOption(option)"
+                class="p-2 cursor-pointer hover:bg-blue-100 hover:text-blue-800">
+                {{ option[labelKey] }}
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="tw-w-full">
+  <div class=" tw-relative">
+    <!-- Bouton pour afficher les options avec icône de dropdown -->
+    <button type="button"
+            class="tw-w-full tw-text-gray-700 tw-border tw-border-gray-300 tw-bg-gray-50 focus:tw-ring-1 focus:tw-ring-[#FF3C00] focus:tw-border-[#FF3C00] tw-rounded-md tw-shadow-sm tw-pl-3 tw-pr-10 tw-py-2 tw-text-left tw-cursor-default sm:tw-text-sm"
+            (click)="toggleDropdown()"
+            [attr.aria-expanded]="isDropdownOpen ? 'true' : 'false'"
+            aria-haspopup="listbox"
+            aria-labelledby="listbox-label">
+      <span class="tw-block tw-truncate">
+        {{ selectedOptions.value?.length ? selectedOptions.value?.join(', ') : placeholder }}
+      </span>
+      <!-- Icône de dropdown avec Remix Icon -->
+      <span class="tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-pr-2">
+        <i *ngIf="!isDropdownOpen" class="ri-arrow-down-s-line tw-text-gray-400"></i>
+        <i *ngIf="isDropdownOpen" class="ri-arrow-up-s-line tw-text-gray-400"></i>
+      </span>
+    </button>
+
+    <!-- Liste des options avec champ de recherche -->
+    <ul *ngIf="isDropdownOpen" class="card tw-absolute tw-z-10 tw-mt-1 tw-w-full tw-shadow-lg tw-max-h-60 tw-rounded-md tw-py-1  tw-text-base tw-ring-1 tw-ring-black tw-ring-opacity-5 sm:tw-text-sm" tabindex="-1" role="listbox">
+      <!-- Champ de recherche -->
+      <li class="tw-px-3 tw-py-2">
+        <input type="text" [formControl]="searchControl" placeholder="Rechercher..." class="tw-text-gray-700 tw-w-full tw-px-2 tw-py-1 tw-border tw-border-gray-300 tw-ring-1 tw-ring-[#FF3C00] focus:tw-border-[#FF3C00] focus:tw-ring-[#FF3C00] tw-rounded-md tw-bg-gray-50"/>
+      </li>
+
+      <!-- Parcours des options filtrées -->
+      <li *ngFor="let option of filteredOptions()" 
+          class="tw-cursor-pointer tw-select-none tw-relative tw-py-2 tw-pl-3 tw-pr-9"
+          (click)="toggleSelection(option)"
+          role="option">
+        <span class="tw-block tw-truncate">{{ option }}</span>
+
+        <!-- Icône si l'option est sélectionnée -->
+        <span *ngIf="isSelected(option)" class="tw-absolute tw-inset-y-0 tw-right-0 tw-flex tw-items-center tw-pr-4">
+          <i class="ri-check-line tw-text-[#FF3C00]"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

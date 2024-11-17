@@ -1,0 +1,47 @@
+<form [formGroup]="formGroup" class="">
+
+  <div class="row">
+    <div *ngFor="let item of formItems" [ngClass]="item.className ? item.className : 'col-6'" class="tw-my-2">
+
+      <span [ngSwitch]="item.type">
+
+        <span *ngSwitchCase="'select'">
+          <custom-dropdown-select *ngIf="item.selectParams" [disabled]="item.isDisable || isViewDetails"
+            [label]="item.label ?? ''" [items]=" item.selectParams.items"></custom-dropdown-select>
+        </span>
+        <!-- <span *ngSwitchCase="'radio'">
+          <custom-radio [options]="[
+                { label: 'Male', value: 'male' },
+                { label: 'Female', value: 'female' }
+              ]" [control]="form.get('gender')" name="gender" [radioClass]="'tw-border-gray-400'"
+            [labelClass]="'tw-text-gray-900'"></custom-radio>
+        </span> -->
+        <span *ngSwitchCase="'checkbox'">
+          <custom-checkbox *ngIf="item && item.label" [label]="item.label" [formGroup]="formGroup"></custom-checkbox>
+        </span>
+
+        <!-- <span *ngSwitchCase="'search'">
+          <custom-search-input [type]="item.type" [formGroup]="formGroup"
+            [control]="formGroup.get(item.formControlName)" [placeholder]="item.placeholder"></custom-search-input>
+        </span> -->
+
+        <span *ngSwitchCase="'textArea'">
+          <custom-textArea *ngIf="item && item.formControlName" [formGroup]="formGroup"
+            [formControlName]="item.formControlName" [placeholder]="item.placeholder"></custom-textArea>
+        </span>
+
+        <span *ngSwitchDefault>
+          <custom-input [label]="item.label ?? 'Label par défaut'"
+            [placeholder]="item.placeholder ?? 'placeHolder par defaut'" *ngIf="item && item.formControlName"
+            [formControlName]="item.formControlName" [formGroup]="formGroup">
+          </custom-input>
+          <!-- <custom-input [label]="item.label" [formControlName]="item.formControlName" [formGroup]="formGroup"
+            [type]="item.type ?? text" [placeholder]="item.placeholder" [required]="item.required"
+            [disabled]="item.disabled || isViewDetails" [minlength]="item.minlength" [maxlength]="item.maxlength"
+            [hint]="item.hint" [icon]="item.icon" [iconClickable]="item.iconClickable" (iconClick)="onIconClick()">
+          </custom-input> -->
+        </span>
+      </span>
+    </div>
+  </div>
+</form>

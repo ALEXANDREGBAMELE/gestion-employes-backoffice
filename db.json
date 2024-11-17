@@ -1,19 +1,19 @@
 {
   "produits": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Produit A",
       "price": 100
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Produit B",
       "price": 200
     }
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "name": "John Doe",
       "username": "johndoe",
       "email": "johndoe@example.com",
@@ -36,7 +36,7 @@
       }
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Jane Smith",
       "username": "janesmith",
       "email": "janesmith@example.com",
@@ -59,7 +59,7 @@
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Michael Johnson",
       "username": "michaelj",
       "email": "michael.johnson@example.com",
@@ -82,7 +82,7 @@
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Emily Davis",
       "username": "emilyd",
       "email": "emily.davis@example.com",
@@ -105,7 +105,7 @@
       }
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Robert Wilson",
       "username": "robertw",
       "email": "robert.wilson@example.com",
@@ -128,7 +128,7 @@
       }
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Alice Brown",
       "username": "aliceb",
       "email": "alice.brown@example.com",
@@ -151,7 +151,7 @@
       }
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "William Turner",
       "username": "willturner",
       "email": "william.turner@example.com",
@@ -174,7 +174,7 @@
       }
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Sophia Martinez",
       "username": "sophiam",
       "email": "sophia.martinez@example.com",
@@ -197,7 +197,7 @@
       }
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "James Harris",
       "username": "jamesh",
       "email": "james.harris@example.com",
@@ -220,7 +220,7 @@
       }
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Olivia Thompson",
       "username": "oliviath",
       "email": "olivia.thompson@example.com",
@@ -243,7 +243,7 @@
       }
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "Mason Lee",
       "username": "masonl",
       "email": "mason.lee@example.com",
@@ -266,7 +266,7 @@
       }
     },
     {
-      "id": 12,
+      "id": "12",
       "name": "Charlotte Clark",
       "username": "charlottec",
       "email": "charlotte.clark@example.com",
@@ -289,7 +289,7 @@
       }
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "Henry Walker",
       "username": "henryw",
       "email": "henry.walker@example.com",
@@ -312,7 +312,7 @@
       }
     },
     {
-      "id": 14,
+      "id": "14",
       "name": "Isabella Lewis",
       "username": "isabellal",
       "email": "isabella.lewis@example.com",
@@ -335,7 +335,7 @@
       }
     },
     {
-      "id": 15,
+      "id": "15",
       "name": "Liam Robinson",
       "username": "liamr",
       "email": "liam.robinson@example.com",
@@ -358,7 +358,7 @@
       }
     },
     {
-      "id": 16,
+      "id": "16",
       "name": "Mia Scott",
       "username": "mias",
       "email": "mia.scott@example.com",
@@ -381,7 +381,7 @@
       }
     },
     {
-      "id": 17,
+      "id": "17",
       "name": "Elijah Green",
       "username": "elijahg",
       "email": "elijah.green@example.com",
@@ -404,7 +404,7 @@
       }
     },
     {
-      "id": 18,
+      "id": "18",
       "name": "Ava Anderson",
       "username": "avaa",
       "email": "ava.anderson@example.com",
@@ -427,7 +427,7 @@
       }
     },
     {
-      "id": 19,
+      "id": "19",
       "name": "Oliver Miller",
       "username": "oliverm",
       "email": "oliver.miller@example.com",
@@ -450,7 +450,7 @@
       }
     },
     {
-      "id": 20,
+      "id": "20",
       "name": "Charlotte Young",
       "username": "charlotty",
       "email": "charlotte.young@example.com",
@@ -475,16 +475,435 @@
   ],
   "contrats": [
     {
-      "id": 1,
-      "title": "Contrat 1",
-      "userId": 1,
-      "status": "Active"
+      "id": "1",
+      "employeeId": 101,
+      "employeeName": "Alice Dupont",
+      "position": "Développeur Frontend",
+      "startDate": "2022-01-15",
+      "endDate": null,
+      "salary": 30000,
+      "status": "active",
+      "department": "Développement"
     },
     {
-      "id": 2,
-      "title": "Contrat 2",
-      "userId": 2,
-      "status": "Inactive"
+      "id": "2",
+      "employeeId": 102,
+      "employeeName": "Bob Martin",
+      "position": "Développeur Backend",
+      "startDate": "2021-03-20",
+      "endDate": null,
+      "salary": 35000,
+      "status": "active",
+      "department": "Développement"
+    },
+    {
+      "id": "3",
+      "employeeId": 103,
+      "employeeName": "Charlie Petit",
+      "position": "Designer UI/UX",
+      "startDate": "2022-05-01",
+      "endDate": null,
+      "salary": 32000,
+      "status": "active",
+      "department": "Design"
+    },
+    {
+      "id": "4",
+      "employeeId": 104,
+      "employeeName": "Diane Roche",
+      "position": "Chef de Projet",
+      "startDate": "2020-10-15",
+      "endDate": null,
+      "salary": 45000,
+      "status": "active",
+      "department": "Gestion"
+    },
+    {
+      "id": "5",
+      "employeeId": 105,
+      "employeeName": "Emilie Bernard",
+      "position": "Analyste de Données",
+      "startDate": "2023-02-10",
+      "endDate": null,
+      "salary": 38000,
+      "status": "active",
+      "department": "Analyse"
+    },
+    {
+      "id": "6",
+      "employeeId": 106,
+      "employeeName": "François Simon",
+      "position": "Ingénieur Système",
+      "startDate": "2019-06-25",
+      "endDate": null,
+      "salary": 42000,
+      "status": "active",
+      "department": "Infrastructure"
+    },
+    {
+      "id": "7",
+      "employeeId": 107,
+      "employeeName": "Georges Lambert",
+      "position": "Responsable Marketing",
+      "startDate": "2021-07-05",
+      "endDate": null,
+      "salary": 46000,
+      "status": "active",
+      "department": "Marketing"
+    },
+    {
+      "id": "8",
+      "employeeId": 108,
+      "employeeName": "Hélène Lefevre",
+      "position": "Comptable",
+      "startDate": "2020-04-18",
+      "endDate": null,
+      "salary": 40000,
+      "status": "active",
+      "department": "Finance"
+    },
+    {
+      "id": "9",
+      "employeeId": 109,
+      "employeeName": "Isabelle Durand",
+      "position": "Développeur Frontend",
+      "startDate": "2023-03-01",
+      "endDate": null,
+      "salary": 31000,
+      "status": "active",
+      "department": "Développement"
+    },
+    {
+      "id": "10",
+      "employeeId": 110,
+      "employeeName": "Jacques Petit",
+      "position": "Analyste de Données",
+      "startDate": "2022-08-10",
+      "endDate": null,
+      "salary": 39000,
+      "status": "active",
+      "department": "Analyse"
+    },
+    {
+      "id": "11",
+      "employeeId": 111,
+      "employeeName": "Katherine Martin",
+      "position": "Développeur Backend",
+      "startDate": "2021-12-12",
+      "endDate": null,
+      "salary": 37000,
+      "status": "active",
+      "department": "Développement"
+    },
+    {
+      "id": "12",
+      "employeeId": 112,
+      "employeeName": "Louis Moreau",
+      "position": "Chef de Projet",
+      "startDate": "2020-01-01",
+      "endDate": null,
+      "salary": 46000,
+      "status": "active",
+      "department": "Gestion"
+    },
+    {
+      "id": "13",
+      "employeeId": 113,
+      "employeeName": "Marie Dubois",
+      "position": "Designer UI/UX",
+      "startDate": "2022-09-22",
+      "endDate": null,
+      "salary": 33000,
+      "status": "active",
+      "department": "Design"
+    },
+    {
+      "id": "14",
+      "employeeId": 114,
+      "employeeName": "Nicolas Gauthier",
+      "position": "Ingénieur Système",
+      "startDate": "2019-05-15",
+      "endDate": null,
+      "salary": 43000,
+      "status": "active",
+      "department": "Infrastructure"
+    },
+    {
+      "id": "15",
+      "employeeId": 115,
+      "employeeName": "Olivia Bernard",
+      "position": "Responsable Marketing",
+      "startDate": "2021-11-11",
+      "endDate": null,
+      "salary": 45000,
+      "status": "active",
+      "department": "Marketing"
+    },
+    {
+      "id": "16",
+      "employeeId": 116,
+      "employeeName": "Paul Brun",
+      "position": "Comptable",
+      "startDate": "2020-03-25",
+      "endDate": null,
+      "salary": 42000,
+      "status": "active",
+      "department": "Finance"
+    },
+    {
+      "id": "17",
+      "employeeId": 117,
+      "employeeName": "Quentin Laurent",
+      "position": "Développeur Frontend",
+      "startDate": "2023-06-15",
+      "endDate": null,
+      "salary": 31000,
+      "status": "active",
+      "department": "Développement"
+    },
+    {
+      "id": "18",
+      "employeeId": 118,
+      "employeeName": "Roxane Lemoine",
+      "position": "Analyste de Données",
+      "startDate": "2022-02-20",
+      "endDate": null,
+      "salary": 38000,
+      "status": "active",
+      "department": "Analyse"
+    },
+    {
+      "id": "19",
+      "employeeId": 119,
+      "employeeName": "Samuel Colin",
+      "position": "Développeur Backend",
+      "startDate": "2021-09-10",
+      "endDate": null,
+      "salary": 36000,
+      "status": "active",
+      "department": "Développement"
+    },
+    {
+      "id": "20",
+      "employeeId": 120,
+      "employeeName": "Thomas Giraud",
+      "position": "Chef de Projet",
+      "startDate": "2020-08-30",
+      "endDate": null,
+      "salary": 47000,
+      "status": "active",
+      "department": "Gestion"
+    }
+  ],
+  "employes": [
+    {
+      "id": "1",
+      "nom": "Jean Dupont",
+      "email": "jean.dupont@example.com",
+      "fonction": "Développeur",
+      "dateEmbauche": "2021-04-15",
+      "salaireAnnuel": 45000,
+      "departement": "Informatique",
+      "superviseur": "Alice Lambert",
+      "statut": "Actif"
+    },
+    {
+      "id": "2",
+      "nom": "Alice Lambert",
+      "email": "alice.lambert@example.com",
+      "fonction": "Chef de projet",
+      "dateEmbauche": "2018-06-01",
+      "salaireAnnuel": 58000,
+      "departement": "Informatique",
+      "superviseur": "Marc Dumont",
+      "statut": "Actif"
+    },
+    {
+      "id": "4",
+      "nom": "Pierre Moreau",
+      "email": "pierre.moreau@example.com",
+      "fonction": "Analyste",
+      "dateEmbauche": "2023-08-21",
+      "salaireAnnuel": 42000,
+      "departement": "Finance",
+      "superviseur": "Lucie Girard",
+      "statut": "Actif"
+    },
+    {
+      "id": "5",
+      "nom": "Clara Dupuis",
+      "email": "clara.dupuis@example.com",
+      "fonction": "Designer",
+      "dateEmbauche": "2022-11-12",
+      "salaireAnnuel": 39000,
+      "departement": "Marketing",
+      "superviseur": "Julien Renault",
+      "statut": "Congé maternité"
+    },
+    {
+      "id": "6",
+      "nom": "Julien Renault",
+      "email": "julien.renault@example.com",
+      "fonction": "Responsable marketing",
+      "dateEmbauche": "2016-09-25",
+      "salaireAnnuel": 52000,
+      "departement": "Marketing",
+      "superviseur": "Marc Dumont",
+      "statut": "Actif"
+    },
+    {
+      "id": "7",
+      "nom": "Lucie Girard",
+      "email": "lucie.girard@example.com",
+      "fonction": "Secrétaire",
+      "dateEmbauche": "2019-07-20",
+      "salaireAnnuel": 32000,
+      "departement": "Ressources Humaines",
+      "superviseur": "Emma Lefevre",
+      "statut": "Actif"
+    },
+    {
+      "id": "8",
+      "nom": "Emma Lefevre",
+      "email": "emma.lefevre@example.com",
+      "fonction": "DRH",
+      "dateEmbauche": "2014-05-30",
+      "salaireAnnuel": 65000,
+      "departement": "Ressources Humaines",
+      "superviseur": "Marc Dumont",
+      "statut": "Actif"
+    },
+    {
+      "id": "9",
+      "nom": "Thomas Giraud",
+      "email": "thomas.giraud@example.com",
+      "fonction": "Ingénieur réseau",
+      "dateEmbauche": "2020-01-11",
+      "salaireAnnuel": 48000,
+      "departement": "Informatique",
+      "superviseur": "Alice Lambert",
+      "statut": "Actif"
+    },
+    {
+      "id": "10",
+      "nom": "Laura Bernard",
+      "email": "laura.bernard@example.com",
+      "fonction": "Assistante administrative",
+      "dateEmbauche": "2017-02-28",
+      "salaireAnnuel": 31000,
+      "departement": "Administration",
+      "superviseur": "Emma Lefevre",
+      "statut": "Actif"
+    },
+    {
+      "id": "11",
+      "nom": "Victor Durand",
+      "email": "victor.durand@example.com",
+      "fonction": "Technicien",
+      "dateEmbauche": "2021-10-08",
+      "salaireAnnuel": 34000,
+      "departement": "Support technique",
+      "superviseur": "Thomas Giraud",
+      "statut": "Actif"
+    },
+    {
+      "id": "12",
+      "nom": "Sophie Martin",
+      "email": "sophie.martin@example.com",
+      "fonction": "Comptable",
+      "dateEmbauche": "2019-03-15",
+      "salaireAnnuel": 37000,
+      "departement": "Finance",
+      "superviseur": "Pierre Moreau",
+      "statut": "Actif"
+    },
+    {
+      "id": "13",
+      "nom": "Paul Petit",
+      "email": "paul.petit@example.com",
+      "fonction": "Data Scientist",
+      "dateEmbauche": "2023-05-10",
+      "salaireAnnuel": 60000,
+      "departement": "Analyse des données",
+      "superviseur": "Alice Lambert",
+      "statut": "Actif"
+    },
+    {
+      "id": "14",
+      "nom": "Nathalie Robert",
+      "email": "nathalie.robert@example.com",
+      "fonction": "Architecte logiciel",
+      "dateEmbauche": "2015-08-05",
+      "salaireAnnuel": 70000,
+      "departement": "Informatique",
+      "superviseur": "Marc Dumont",
+      "statut": "Actif"
+    },
+    {
+      "id": "15",
+      "nom": "David Simon",
+      "email": "david.simon@example.com",
+      "fonction": "Juriste",
+      "dateEmbauche": "2016-07-12",
+      "salaireAnnuel": 54000,
+      "departement": "Juridique",
+      "superviseur": "Marc Dumont",
+      "statut": "Actif"
+    },
+    {
+      "id": "16",
+      "nom": "Julie Caron",
+      "email": "julie.caron@example.com",
+      "fonction": "Chef de produit",
+      "dateEmbauche": "2022-02-18",
+      "salaireAnnuel": 47000,
+      "departement": "Marketing",
+      "superviseur": "Julien Renault",
+      "statut": "Actif"
+    },
+    {
+      "id": "17",
+      "nom": "Antoine Lefevre",
+      "email": "antoine.lefevre@example.com",
+      "fonction": "Stagiaire",
+      "dateEmbauche": "2024-01-10",
+      "salaireAnnuel": 12000,
+      "departement": "Informatique",
+      "superviseur": "Alice Lambert",
+      "statut": "Actif"
+    },
+    {
+      "id": "18",
+      "nom": "Isabelle Laurent",
+      "email": "isabelle.laurent@example.com",
+      "fonction": "Chargée de communication",
+      "dateEmbauche": "2020-09-05",
+      "salaireAnnuel": 40000,
+      "departement": "Communication",
+      "superviseur": "Julien Renault",
+      "statut": "Actif"
+    },
+    {
+      "id": "19",
+      "nom": "Lucas Morel",
+      "email": "lucas.morel@example.com",
+      "fonction": "Consultant",
+      "dateEmbauche": "2023-06-20",
+      "salaireAnnuel": 55000,
+      "departement": "Finance",
+      "superviseur": "Pierre Moreau",
+      "statut": "Actif"
+    },
+    {
+      "id": "20",
+      "nom": "Camille Blanchard",
+      "email": "camille.blanchard@example.com",
+      "fonction": "Coach Agile",
+      "dateEmbauche": "2018-11-15",
+      "salaireAnnuel": 62000,
+      "departement": "Informatique",
+      "superviseur": "Alice Lambert",
+      "statut": "Actif"
     }
   ]
 }

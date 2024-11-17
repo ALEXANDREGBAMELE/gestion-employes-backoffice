@@ -1,0 +1,10 @@
+<div class="tw-flex tw-items-center tw-mb-4">
+  <input [id]="id" type="checkbox" [checked]="checked" [disabled]="disabled" [required]="required"
+    (change)="toggleChecked()" class="tw-w-5 tw-h-5 tw-rounded-md tw-transition tw-duration-200 tw-ease-in-out tw-border tw-outline-none tw-shadow-sm
+           tw-bg-white tw-border-gray-300 tw-checked:tw-bg-blue-900 tw-checked:tw-border-blue-900
+           focus:tw-ring-2 focus:tw-ring-blue-900 disabled:tw-cursor-not-allowed disabled:tw-bg-gray-200" />
+  <label [for]="id" class="tw-ms-3 tw-text-sm tw-font-medium tw-transition tw-ease-in-out tw-cursor-pointer 
+                    tw-text-gray-700 disabled:tw-text-gray-400">
+    {{ label }}
+  </label>
+</div>

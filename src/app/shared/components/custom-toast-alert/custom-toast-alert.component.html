@@ -1,0 +1,21 @@
+<div *ngIf="isVisible" class="tw-fixed tw-top-4 tw-right-4 tw-z-[9999] tw-w-[40%] tw-box-border"
+  [ngClass]="{'tw-bg-[#2ecc71]': type === 'success', 'tw-bg-[#FF3C00]': type === 'error', 'tw-bg-[#17A2B8]': type === 'info'}"
+  (mouseenter)="pauseAutoClose()" (mouseleave)="resumeAutoClose()">
+
+  <div class="tw-px-4 tw-py-2 tw-flex tw-justify-between">
+    <div class=" tw-w-full tw-flex ">
+      <!-- Message -->
+      <div class="tw-ml-3 tw-text-sm tw-font-medium"
+        [ngClass]="{'tw-text-green-50': type === 'success', 'tw-text-red-50': type === 'error', 'tw-text-blue-50': type === 'info'}">
+        {{ message }}
+      </div>
+    </div>
+
+    <!-- Bouton de fermeture -->
+    <button type="button" class="tw-ml-auto tw-flex-shrink-0 tw-text-gray-400 hover:tw-text-gray-500"
+      (click)="closeToast()">
+      <span class="tw-sr-only">Fermer</span>
+      <i class="ri-close-circle-fill tw-text-white tw-ms-3"></i>
+    </button>
+  </div>
+</div>

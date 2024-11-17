@@ -20,11 +20,23 @@ const routes: Routes = [
       },
       {
         path: "users",
+        data: { breadcrumb: 'User' },
         loadChildren: () => import('./views/user/user.module').then((m) => m.UserModule)
       },
       {
         path: "contract",
-        loadChildren: () => import('./views/contrat/contrat.module').then((m) => m.ContratModule)
+        data: { breadcrumb: 'RH' },
+        loadChildren: () => import('./views/contrat/contract.module').then((m) => m.ContratModule)
+      },
+      {
+        path: "employee",
+        data: { breadcrumb: 'RH' },
+        loadChildren: () => import('./views/employee/employee.module').then((m) => m.EmployeeModule)
+      },
+      {
+        path: "parametre",
+        data: { breadcrumb: 'Paramètre' },
+        loadChildren: () => import('./views/setting/setting.module').then((m) => m.SettingModule)
       }
     ]
   },

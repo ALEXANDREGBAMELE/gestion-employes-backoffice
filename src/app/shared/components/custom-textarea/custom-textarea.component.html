@@ -1,0 +1,16 @@
+<div class="mb-4">
+  <label *ngIf="label" for="{{ formControlName }}"
+    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+    {{ label }}:
+    <span *ngIf="isRequired" class="text-red-500">*</span>
+  </label>
+  <textarea formControlName="formControlName" id="{{ formControlName }}" rows="5"
+    class="form-control custom-input block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300"
+    placeholder="{{ placeholder ? placeholder : label }}" autocomplete="off" [disabled]="disabled"
+    (input)="onChange($event.target.value)"></textarea>
+  <div
+    *ngIf="formGroup.controls[formControlName]?.invalid && (formGroup.controls[formControlName]?.dirty || formGroup.controls[formControlName]?.touched)"
+    class="text-red-500 text-xs mt-1">
+    {{ errorMessage }}
+  </div>
+</div>

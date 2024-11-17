@@ -1,114 +1,97 @@
-<div class="p-4">
-    <button (click)="refreshData()" class="mb-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-        Rafraîchir
-    </button>
-
-    <div *ngIf="loading" class="text-center text-lg text-gray-600">Chargement...</div>
-
-    <table *ngIf="!loading" class="min-w-full border border-gray-300">
-        <thead class="bg-gray-200">
-            <tr>
-                <th *ngIf="showIndex" class="border px-4 py-2">#</th>
-                <th *ngIf="showCheckbox" class="border px-4 py-2">
-                    <input type="checkbox" />
+<div class="tw-relative tw-overflow-x-auto tw-shadow-md tw-sm:rounded-lg">
+    <table class="tw-w-full tw-text-sm tw-text-left rtl:tw-text-right tw-text-gray-500 dark:tw-text-gray-400">
+        <thead class="tw-text-xs tw-text-gray-700 tw-bg-gray-50 dark:tw-bg-gray-700 tw-w-full">
+            <tr class="tw-border-y-2 tw-border-black tw-py-6 tw-px-3">
+                <th scope="tw-col" class="tw-px-4 tw-py-2">#</th>
+                <th scope="tw-col" *ngFor="let header of tableHeaderData" class="tw-px-4 tw-py-2">
+                    {{ header.name }}
                 </th>
-                <th *ngFor="let column of columns" class="px-4 py-2 text-left border-b border-gray-300">
-                    {{ column.title }}
-                </th>
-                <th *ngIf="actionButtons.length > 0" class="border px-4 py-2">Actions</th>
+                <th *ngIf="tableActionButtons?.length" class="tw-text-center">Actions</th>
             </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let item of paginatedData; let i = index" class="hover:bg-gray-100">
-                <td *ngIf="showIndex" class="border px-4 py-2">{{ i + 1 }}</td>
-                <td *ngIf="showCheckbox" class="border px-4 py-2">
-                    <input type="checkbox" />
-                </td>
 
-                <!-- Gestion dynamique du type de contenu -->
-                <td *ngFor="let column of columns" class="px-4 py-2 border-b border-gray-300">
-                    <ng-container [ngSwitch]="column.type">
-                        <!-- Texte avec badge si nécessaire -->
-                        <ng-container *ngSwitchDefault>
-                            <ng-container *ngIf="isBadgeColumn(column.key); else normalText">
-                                <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full"
-                                    [ngClass]="getBadgeClass(column.key, item[column.key])">
-                                    {{ item[column.key] }}
+        <tbody class="tw-border-b-2 tw-border-black">
+            <ng-container *ngIf="!isLoading; else loadingSpinner">
+                <!-- Vérification si le tableau est vide -->
+                <tr *ngIf="tableBodyData && tableBodyData.length === 0 ">
+                    <td colspan="100%" class="tw-text-center tw-p-5">
+                        Aucune donnée disponible pour le moment.
+                    </td>
+                </tr>
+
+                <!-- Affichage des données si le tableau n'est pas vide -->
+                <tr *ngFor="let row of tableBodyData; let i = index" (click)="handleRowClick(row)"
+                    [ngClass]="{'tw-bg-white': i % 2 === 0, 'tw-bg-gray-100': i % 2 !== 0}"
+                    class="tw-border-b dark:tw-bg-gray-800 tw-border-[#FDE8E8] hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600">
+                    <td class="tw-px-4 tw-py-2">{{ i + 1 }}</td>
+                    <td *ngFor="let header of tableHeaderData" class="tw-px-4 tw-py-2">
+                        <!-- Custom renderer for different types of data -->
+                        <ng-container [ngSwitch]="getFileType(row[header.value])">
+                            <!-- <ng-container *ngIf="concat;else templateName">
+                                <span> {{{{ row[header.concat[0]] }} + ' ' + {{ row[header[1]] }}}} </span>
+                            </ng-container> -->
+                            <ng-container *ngIf="isBadgeColumn(header.value); else normalCell">
+                                <span
+                                    class="tw-inline-block tw-px-3 tw-py-1 tw-text-xs tw-font-semibold tw-rounded-full"
+                                    [ngClass]="getBadgeClass(header.value, row[header.value])">
+                                    {{ row[header.value] }}
                                 </span>
                             </ng-container>
-                            <ng-template #normalText>
-                                {{ item[column.key] }}
+                            <ng-template #normalCell>
+                                <!-- Text -->
+                                <span *ngSwitchCase="'text'" [ngClass]="getBadgeClass(header.value, row[header.value])">
+                                    {{ row[header.value] }}
+                                </span>
+
+                                <!-- Image -->
+                                <img *ngSwitchCase="'image'" [src]="row[header.value]"
+                                    class="tw-w-16 tw-h-16 tw-object-cover" alt="Image" />
+
+                                <!-- PDF -->
+                                <a *ngSwitchCase="'pdf'" [href]="row[header.value]" target="_blank"
+                                    class="tw-text-blue-500">
+                                    View PDF
+                                </a>
+
+                                <!-- Default for unsupported file types -->
+                                <span *ngSwitchDefault>
+                                    Unsupported file type
+                                </span>
                             </ng-template>
                         </ng-container>
+                    </td>
 
-                        <!-- Image -->
-                        <ng-container *ngSwitchCase="'image'">
-                            <img [src]="item[column.key]" alt="Image" class="h-10 w-10 object-cover" />
+                    <td *ngIf="tableActionButtons" class="tw-px-6 tw-py-4 tw-flex tw-justify-center">
+                        <ng-container *ngFor="let action of tableActionButtons">
+                            <button (click)="action.method(row)" [ngStyle]="action.style || {}"
+                                class="tw-mr-2 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-gray-100 dark:hover:tw-bg-gray-700">
+                                <i class="{{action.icon}} tw-text-xl tw-text-[{{action.color}}]"
+                                    title="{{action.title}}"></i>
+                            </button>
                         </ng-container>
+                    </td>
 
-                        <!-- Fichier -->
-                        <ng-container *ngSwitchCase="'file'">
-                            <a [href]="item[column.key]" download class="text-blue-500 underline">
-                                Télécharger le fichier
-                            </a>
-                        </ng-container>
+                </tr>
+            </ng-container>
 
-                        <!-- Vidéo -->
-                        <ng-container *ngSwitchCase="'video'">
-                            <video controls [src]="item[column.key]" class="h-20 w-20">
-                                Vidéo non prise en charge
-                            </video>
-                        </ng-container>
-
-                        <!-- Audio -->
-                        <ng-container *ngSwitchCase="'audio'">
-                            <audio controls [src]="item[column.key]">
-                                Audio non pris en charge
-                            </audio>
-                        </ng-container>
-
-                        <!-- Lien -->
-                        <ng-container *ngSwitchCase="'link'">
-                            <a [href]="item[column.key]" target="_blank" class="text-blue-500 underline">
-                                {{ item[column.key] }}
-                            </a>
-                        </ng-container>
-
-                        <!-- Cas par défaut -->
-                        <!-- <ng-container *ngSwitchDefault>
-                            {{ item[column.key] }}
-                        </ng-container> -->
-                    </ng-container>
+            <!-- Affichage du spinner pendant le chargement -->
+            <ng-template #loadingSpinner>
+                <td colspan="100%" class="tw-text-center tw-p-5 tw-flex tw-justify-center">
+                    <div role="status">
+                        <svg aria-hidden="true"
+                            class="tw-w-8 tw-h-8 tw-text-gray-200 tw-animate-spin dark:tw-text-gray-600 tw-fill-blue-600"
+                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="currentColor" />
+                            <path
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentFill" />
+                        </svg>
+                        <span class="tw-sr-only">Loading...</span>
+                    </div>
                 </td>
-
-        
-                
-                <!-- Actions -->
-                <td *ngIf="actionButtons.length > 0" class="border px-4 py-2">
-                    <ng-container *ngFor="let button of actionButtons">
-                        <button (click)="button.action(item)" class="bg-blue-500 text-white py-1 px-2 rounded">
-                            {{ button.label }}
-                        </button>
-                    </ng-container>
-                </td>
-            </tr>
-
-            <tr *ngIf="paginatedData.length === 0">
-                <td colspan="100%" class="px-4 py-2 text-center text-gray-500">{{ noDataMessage }}</td>
-            </tr>
+            </ng-template>
         </tbody>
     </table>
-
-    <!-- Pagination -->
-    <div *ngIf="totalPages > 1" class="mt-4 flex justify-between items-center">
-        <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1"
-            class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 disabled:opacity-50">
-            Précédent
-        </button>
-        <span>{{ currentPage }} / {{ totalPages }}</span>
-        <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages"
-            class="bg-gray-300 text-gray-700 py-2 px-4 rounded hover:bg-gray-400 disabled:opacity-50">
-            Suivant
-        </button>
-    </div>
 </div>

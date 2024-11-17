@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DrawerService } from 'src/app/core/services/drawer.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
@@ -13,6 +13,11 @@ export class DefaultSideBarComponent implements OnInit {
   public navItems = navData || null;
   isOpen = false;
   isDarkMode = false;
+  isSidebarOpen: boolean = false;
+
+  // Output pour émettre la valeur vers le parent
+  @Output() fullScreemChange: EventEmitter<boolean> = new EventEmitter();
+
   constructor(private router: Router, private themeService: ThemeService, private drawerService: DrawerService) { }
 
   ngOnInit(): void {
@@ -22,6 +27,8 @@ export class DefaultSideBarComponent implements OnInit {
     this.drawerService.drawerState$.subscribe((isOpen: boolean) => {
       this.isOpen = isOpen;
     });
+
+
 
     // this.router.events
     //   .pipe(filter(event => event instanceof NavigationEnd))

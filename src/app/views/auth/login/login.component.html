@@ -1,41 +1,58 @@
-<section class="bg-gray-50 dark:bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <!-- <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-            <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-            Flowbite
-        </a> -->
+<section class="tw-relative tw-bg-gray-50 dark:tw-bg-gray-900">
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover">
+        <source src="../../../../assets/videos/video_background_login.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Overlay to darken the video for better readability of the login content -->
+    <div class="tw-absolute tw-inset-0 tw-bg-black tw-opacity-60"></div>
+
+    <!-- Login Content -->
+    <div
+        class="tw-relative tw-flex tw-flex-col tw-items-center tw-justify-center tw-px-6 tw-py-8 tw-mx-auto md:tw-h-screen lg:tw-py-0">
+        <a href="#"
+            class="tw-flex tw-items-center tw-mb-6 tw-text-2xl tw-font-semibold tw-text-gray-900 dark:tw-text-white">
+            <img class="tw-w-8 tw-h-8 tw-mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+                alt="logo">
+            GesEmploy
+        </a>
         <div
-            class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            class="tw-w-full tw-bg-white tw-rounded-lg tw-shadow dark:tw-border md:tw-mt-0 sm:tw-max-w-md xl:tw-p-0 dark:tw-bg-gray-800 dark:tw-border-gray-700">
+            <div class="tw-p-6 tw-space-y-4 md:tw-space-y-6 sm:tw-p-8">
+                <h1
+                    class="tw-text-xl tw-font-bold tw-leading-tight tw-tracking-tight tw-text-gray-900 md:tw-text-2xl dark:tw-text-white">
                     Connectez-vous !
                 </h1>
-                <form [formGroup]="form" class="space-y-4 md:space-y-6" action="#">
+                <form [formGroup]="form" class="tw-space-y-4 md:tw-space-y-6" action="#">
                     <custom-input [formControlName]="'username'" [label]="'Username'" [formGroup]="form"
                         [type]="'text'">
-
                     </custom-input>
                     <custom-input [formControlName]="'password'" [label]="'Password'" [formGroup]="form"
                         [type]="'password'">
                     </custom-input>
 
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input id="remember" aria-describedby="remember" type="checkbox"
-                                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                    <div class="tw-flex tw-items-center tw-justify-between">
+                        <div class="tw-flex tw-items-start">
+                            <div class="tw-flex tw-items-center tw-h-5">
+                                <!-- <input id="remember" aria-describedby="remember" type="checkbox"
+                                    class="tw-w-4 tw-h-4 tw-border tw-border-gray-300 tw-rounded tw-bg-gray-50 focus:tw-ring-3 focus:tw-ring-primary-300 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:focus:tw-ring-primary-600 dark:tw-ring-offset-gray-800"
                                     required="">
                             </div>
-                            <div class="ml-3 text-sm">
-                                <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
+                            <div class="tw-ml-3 tw-text-sm">
+                                <label for="remember" class="tw-text-gray-500 dark:tw-text-gray-300">Remember me</label>
+                            </div> -->
+                                <custom-checkbox [label]="'Remember me'"></custom-checkbox>
                             </div>
                         </div>
                         <a href="#"
-                            class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot
+                            class="tw-text-sm tw-font-medium tw-text-primary-600 hover:tw-underline dark:tw-text-primary-500">Forgot
                             password?</a>
                     </div>
-                    <div class="mt-6"><custom-button (click)="login()" [size]="'full'" [borderRadius]="'full'"
-                            [name]="'Login'" [isSubmitted]="isSubmitted"></custom-button>
+                    <div class="tw-mt-6 tw-w-full">
+                        <custom-button (click)="login()" [fullWidth]="true" [size]="'small'" [borderRadius]="'full'"
+                            [label]="'Login'" [color]="'orange'" [isSubmitted]="isSubmitted">
+                        </custom-button>
                     </div>
                 </form>
             </div>

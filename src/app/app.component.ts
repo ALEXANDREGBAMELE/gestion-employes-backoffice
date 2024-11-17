@@ -5,7 +5,7 @@ import { LoaderService } from './core/services/loader.service';
 @Component({
   selector: 'body',
   template: `
-    <app-loader></app-loader>
+    <custom-loader></custom-loader>
     <router-outlet></router-outlet>
   `,
 })

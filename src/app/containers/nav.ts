@@ -56,8 +56,26 @@ export const navData: INavData[] = [
                 // url: '/users/add',
                 children: [
                     {
+                        title: "Employé",
+                        url: '/employee',
+                    },
+                    {
                         title: "Contract",
-                        url: '/contract/list',
+                        // url: '/contract',
+                        children: [
+                            {
+                                title: "Liste des contracts",
+                                url: '/contract/list',
+                            },
+                            {
+                                title: "Type de contracts",
+                                url: 'contract/type',
+                            },
+                            {
+                                title: "Clause de contracts",
+                                url: 'contract/clause',
+                            }
+                        ]
                     },
 
                 ]
@@ -90,9 +108,15 @@ export const navData: INavData[] = [
     },
     {
         title: 'Settings',
-        icon: 'fas fa-cog',
-        url: '/settings',
+        icon: 'ri-settings-4-line',
+        // url: '/settings',
         disabled: false, // Cet élément est désactivé
+        children: [
+            {
+                title: 'Entreprise',
+                url: '/parametre'
+            }
+        ]
     },
     {
         title: 'Custom Action',
