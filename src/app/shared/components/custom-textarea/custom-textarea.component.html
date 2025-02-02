@@ -1,4 +1,4 @@
-<div class="mb-4">
+<!-- <div class="mb-4">
   <label *ngIf="label" for="{{ formControlName }}"
     class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
     {{ label }}:
@@ -13,4 +13,43 @@
     class="text-red-500 text-xs mt-1">
     {{ errorMessage }}
   </div>
-</div>
+</div> -->
+
+
+<!-- <div class="tw-mb-1">
+  <label
+    [for]="innerName"
+    class="tw-text-sm tw-mb-2 tw-text-gray-900 block font-medium dark:text-white"
+    [ngClass]="{
+      'tw-text-green-700 dark:tw-text-green-500': isValid,
+      'text-red-700 dark:text-red-500': currentInnerErrorMessage !== ''
+    }"
+  >
+    {{ label }}
+  </label>
+
+  <textarea
+    [id]="innerName"
+    [name]="innerName"
+    [placeholder]="label"
+    [value]="innerValue"
+    [disabled]="innerDisabled"
+    [placeholder]="placeholder"
+    (input)="updateValue($event)"
+    (blur)="handleBlur()"
+    [required]="required"
+    class="tw-w-full tw-text-sm tw-bg-gray-50 tw-rounded-lg tw-text-gray-900 block border border-gray-300 p-2 focus:border-primary focus:ring-primary"
+    [ngClass]="{
+      'tw-text-green-900 border-green-500 bg-green-50 placeholder-green-700 focus:border-green-500 focus:ring-green-500 dark:border-green-400 dark:bg-green-100':
+        isValid,
+      'border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100':
+        currentInnerErrorMessage !== ''
+    }"
+  ></textarea>
+
+  @if (currentInnerErrorMessage !== "") {
+    <p class="tw-mt-2 tw-text-sm text-red-600 dark:text-red-500">
+      <span class="font-medium">{{ currentInnerErrorMessage }}</span>
+    </p>
+  }
+</div> -->

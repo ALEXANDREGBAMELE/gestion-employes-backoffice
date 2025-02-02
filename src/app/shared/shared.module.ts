@@ -16,7 +16,7 @@ import { CustomModalComponent } from './components/custom-modal/custom-modal.com
 import { CustomPaginationComponent } from './components/custom-pagination/custom-pagination.component';
 import { CustomRadioComponent } from './components/custom-radio/custom-radio.component';
 import { CustomTableComponent } from './components/custom-table/custom-table.component';
-import { CustomTextareaComponent } from './components/custom-textarea/custom-textarea.component';
+// import { CustomTextareaComponent } from './components/custom-textarea/custom-textarea.component';
 import { CustomToastAlertComponent } from './components/custom-toast-alert/custom-toast-alert.component';
 import { SharedRoutingModule } from './shared-routing.module';
 
@@ -27,7 +27,7 @@ const sharedComponents = [
   BreadcrumbComponent,
   CustomSearchInputComponent,
   CustomBasicCrudComponent,
-  CustomTextareaComponent,
+  // CustomTextareaComponent,
   CustomToastAlertComponent,
   CustomLoaderComponent,
   CustomTableComponent,

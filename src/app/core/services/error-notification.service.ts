@@ -11,9 +11,9 @@ export class ErrorNotificationService {
     // Notification d'erreur générique
     showError(message: string, title: string = 'Erreur'): void {
         this.toastr.error(message, title, {
-            timeOut: 5000, // Durée d'affichage
-            closeButton: true, // Bouton de fermeture
-            progressBar: true, // Barre de progression
+            timeOut: 5000,
+            closeButton: true,
+            progressBar: true,
         });
     }
 

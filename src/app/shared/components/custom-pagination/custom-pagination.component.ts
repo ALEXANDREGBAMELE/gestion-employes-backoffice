@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'custom-pagination',
   templateUrl: './custom-pagination.component.html',
-  styleUrls: ['./custom-pagination.component.scss'],
 })
 export class CustomPaginationComponent implements OnInit {
   @Input() currentPage: number = 1;

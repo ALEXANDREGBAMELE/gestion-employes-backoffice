@@ -1,14 +1,28 @@
-<form [formGroup]="formGroup" class="">
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="">
 
   <div class="row">
     <div *ngFor="let item of formItems" [ngClass]="item.className ? item.className : 'col-6'" class="tw-my-2">
 
-      <span [ngSwitch]="item.type">
+      <span *ngIf="item" [ngSwitch]="item.type">
+
+
 
         <span *ngSwitchCase="'select'">
-          <custom-dropdown-select *ngIf="item.selectParams" [disabled]="item.isDisable || isViewDetails"
-            [label]="item.label ?? ''" [items]=" item.selectParams.items"></custom-dropdown-select>
+          <!-- <custom-dropdown-select *ngIf="item.selectParams" [disabled]="item.isDisable || isViewDetails"
+            [label]="item.label ?? ''" [items]=" item.selectParams.items"></custom-dropdown-select> -->
+
+          <div class="tw-max-w-sm tw-mx-auto">
+            <label for="countries"
+              class="tw-block tw-mb-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-white">
+              {{item.label}} </label>
+            <select id="countries" [formControlName]="item.name"
+              class="tw-bg-gray-50 tw-border tw-border-gray-300 tw-text-gray-900 tw-text-sm tw-rounded-lg tw-focus:ring-blue-500 tw-focus:border-blue-500 tw-block tw-w-full tw-p-2.5 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:tw-focus:ring-blue-500 dark:tw-focus:border-blue-500">
+              <option selected>Choose a country</option>
+              <option *ngFor="let select of item?.selectParams?.items" [value]="select.value"> {{select.name}} </option>
+            </select>
+          </div>
         </span>
+
         <!-- <span *ngSwitchCase="'radio'">
           <custom-radio [options]="[
                 { label: 'Male', value: 'male' },
@@ -25,15 +39,14 @@
             [control]="formGroup.get(item.formControlName)" [placeholder]="item.placeholder"></custom-search-input>
         </span> -->
 
-        <span *ngSwitchCase="'textArea'">
+        <!-- <span *ngSwitchCase="'textArea'">
           <custom-textArea *ngIf="item && item.formControlName" [formGroup]="formGroup"
             [formControlName]="item.formControlName" [placeholder]="item.placeholder"></custom-textArea>
-        </span>
-
+        </span> -->
+        <!-- {{ formGroup.value | json }} -->
         <span *ngSwitchDefault>
-          <custom-input [label]="item.label ?? 'Label par défaut'"
-            [placeholder]="item.placeholder ?? 'placeHolder par defaut'" *ngIf="item && item.formControlName"
-            [formControlName]="item.formControlName" [formGroup]="formGroup">
+          <custom-input [label]="item.label ?? 'DefaultLabel'" [placeholder]="item.placeholder ?? 'DefaultPlaceholder'"
+            [formControlName]="item.name ?? ''">
           </custom-input>
           <!-- <custom-input [label]="item.label" [formControlName]="item.formControlName" [formGroup]="formGroup"
             [type]="item.type ?? text" [placeholder]="item.placeholder" [required]="item.required"
@@ -43,5 +56,9 @@
         </span>
       </span>
     </div>
+  </div>
+  <div class="tw-flex tw-justify-end tw-gap-5">
+    <custom-button (click)="onCancel()" [color]="'gray'" [label]="'Annuler'"></custom-button>
+    <custom-button (click)="onSubmit()" [isSubmitted]="isSubmitted" [label]="'Enregistrer'"></custom-button>
   </div>
 </form>

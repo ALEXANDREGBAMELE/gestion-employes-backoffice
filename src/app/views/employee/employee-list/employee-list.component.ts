@@ -24,7 +24,7 @@ export class EmployeeListComponent implements OnInit {
       endPoint: "http://localhost:3000/employes",
       actionParam: {
         create: {
-          endPoint: 'http://localhost:3000/employes/create',
+          endPoint: 'http://localhost:3000/employes',
           action: ''
         },
         update: {
@@ -57,82 +57,83 @@ export class EmployeeListComponent implements OnInit {
   formItems = [
     {
       type: FormsItemType.Input,
-      formControlName: 'firstName',
+      name: 'firstName',
       label: 'Prénom',
       placeholder: 'Entrez le prénom',
       validators: ['required', 'minLength:2']
     },
     {
       type: FormsItemType.Input,
-      formControlName: 'lastName',
+      name: 'lastName',
       label: 'Nom',
       placeholder: 'Entrez le nom',
       validators: ['required', 'minLength:2']
     },
     {
       type: FormsItemType.Input,
-      formControlName: 'email',
+      name: 'email',
       label: 'Email',
       placeholder: 'Entrez l\'email',
       validators: ['required', 'email']
     },
     {
       type: FormsItemType.Input,
-      formControlName: 'phone',
+      name: 'phone',
       label: 'Téléphone',
       placeholder: 'Entrez le numéro de téléphone',
       validators: ['required', 'pattern:^[0-9]{10,15}$']
     },
     {
       type: FormsItemType.Input,
-      formControlName: 'position',
+      name: 'position',
       label: 'Fonction',
       placeholder: 'Entrez la fonction',
       validators: ['required']
     },
     {
       type: FormsItemType.Date,
-      formControlName: 'startDate',
+      name: 'startDate',
       label: 'Date de début',
       placeholder: 'Sélectionnez une date',
       validators: ['required']
     },
     {
       type: FormsItemType.Select,
-      formControlName: 'contractType',
+      id: 'contractType',
+      name: 'contractType',
       label: 'Type de contrat',
       selectParams: {
         items: [
-          { key: 'CDI', value: 'CDI' },
-          { key: 'CDD', value: 'CDD' },
-          { key: 'Stage', value: 'Stage' }
+          { name: 'CDI', value: 'CDI' },
+          { name: 'CDD', value: 'CDD' },
+          { name: 'Stage', value: 'Stage' }
         ],
       },
       validators: ['required']
     },
     {
       type: FormsItemType.Input,
-      formControlName: 'hourlyRate',
+      name: 'hourlyRate',
       label: 'Taux horaire',
       placeholder: 'Entrez le taux horaire',
       validators: ['required', 'pattern:^[0-9]*\\.?[0-9]+$']
     },
     {
       type: FormsItemType.Input,
-      formControlName: 'weeklyHours',
+      name: 'weeklyHours',
       label: 'Temps de travail (/semaine)',
       placeholder: 'Entrez le nombre d\'heures par semaine',
       validators: ['required', 'pattern:^[0-9]+$']
     },
     {
       type: FormsItemType.Select,
-      formControlName: 'contractStatus',
+      name: 'contractStatus',
       label: 'Statut du contrat',
+      id: 'contractStatus',
       selectParams: {
-        value: '',
         items: [
-          { key: 'Admin', value: 'admin' },
-          { key: 'User', value: 'user' },
+          { name: 'Admin', value: 'admin' },
+          { name: 'User', value: 'user' },
         ],
       },
       validators: ['required']

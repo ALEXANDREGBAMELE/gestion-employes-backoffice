@@ -18,21 +18,18 @@
     <ng-container [ngSwitch]="currentAction">
         <!-- Création / Modification -->
         <ng-container *ngSwitchCase="'create'">
-            <custom-dynamic-form [formItems]="formItems" [(formGroup)]="saveItems"></custom-dynamic-form>
-            <div class="tw-flex tw-justify-end tw-gap-5">
-                <custom-button (click)="closeModal()" [color]="'gray'" [label]="'Annuler'"></custom-button>
-                <custom-button (click)="onSubmit()" [label]="'Enregistrer'"></custom-button>
-            </div>
+            <custom-dynamic-form [formItems]="formItems" [formGroup]="saveItems" (formSubmit)="handleFormSubmit($event)"
+                [isSubmitted]="isSubmitted" (isModalOpen)="closeModal($event)"></custom-dynamic-form>
         </ng-container>
 
 
         <ng-container *ngSwitchCase="'edit'">
-            <custom-dynamic-form [formData]="rowData" [formItems]="formItems"
-                [formGroup]="saveItems"></custom-dynamic-form>
-            <div class="tw-flex tw-justify-end tw-gap-5">
+            <custom-dynamic-form [formData]="rowData" [formItems]="formItems" [formGroup]="saveItems"
+                (isModalOpen)="closeModal($event)"></custom-dynamic-form>
+            <!-- <div class="tw-flex tw-justify-end tw-gap-5">
                 <custom-button (click)="closeModal()" [color]="'gray'" [label]="'Annuler'"></custom-button>
                 <custom-button (click)="onSubmit()" [label]="'Enregistrer'"></custom-button>
-            </div>
+            </div> -->
         </ng-container>
 
         <!-- Suppression -->
@@ -59,5 +56,5 @@
     </ng-container>
 </custom-modal>
 
-<custom-toast-alert [message]="message ?? ' '" [isVisible]="isToastOpen"
+<custom-toast-alert *ngIf="message" [message]="message" [isVisible]="isToastOpen"
     [type]="typeMessage === 'success' ? 'success' : 'error'"></custom-toast-alert>

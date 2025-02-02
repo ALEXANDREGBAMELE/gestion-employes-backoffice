@@ -36,24 +36,6 @@ export class CustomButtonComponent implements OnInit {
     }
   }
 
-  // getButtonClasses(): string[] {
-  //   return [
-  //     'tw-inline-flex',
-  //     'tw-items-center',
-  //     'tw-justify-center',
-  //     'tw-font-medium',
-  //     'tw-rounded',
-  //     'tw-transition',
-  //     'tw-ease-in-out',
-  //     'tw-duration-150',
-  //     `tw-px-${this.getSizePadding(this.size)}`,
-  //     `tw-py-${this.getSizePadding(this.size, true)}`,
-  //     'tw-bg-[#FF3C00]',
-  //     'tw-text-white',
-  //     this.fullWidth ? 'tw-w-full' : '',
-  //     (this.disabled || this.loading) ? 'tw-opacity-50 tw-cursor-not-allowed' : '',
-  //     this.customClasses
-  //   ]; }
 
   getButtonClasses(): string {
     const baseClasses = [

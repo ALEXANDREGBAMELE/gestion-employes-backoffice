@@ -697,17 +697,6 @@
   ],
   "employes": [
     {
-      "id": "1",
-      "nom": "Jean Dupont",
-      "email": "jean.dupont@example.com",
-      "fonction": "Développeur",
-      "dateEmbauche": "2021-04-15",
-      "salaireAnnuel": 45000,
-      "departement": "Informatique",
-      "superviseur": "Alice Lambert",
-      "statut": "Actif"
-    },
-    {
       "id": "2",
       "nom": "Alice Lambert",
       "email": "alice.lambert@example.com",
@@ -895,15 +884,30 @@
       "statut": "Actif"
     },
     {
-      "id": "20",
-      "nom": "Camille Blanchard",
-      "email": "camille.blanchard@example.com",
-      "fonction": "Coach Agile",
-      "dateEmbauche": "2018-11-15",
-      "salaireAnnuel": 62000,
-      "departement": "Informatique",
-      "superviseur": "Alice Lambert",
-      "statut": "Actif"
+      "id": "103a",
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "phone": "",
+      "position": "",
+      "startDate": "",
+      "contractType": "Stage",
+      "hourlyRate": "",
+      "weeklyHours": "",
+      "contractStatus": "admin"
+    },
+    {
+      "id": "655b",
+      "firstName": "Consequatur qui ut n",
+      "lastName": "Assumenda in eligend",
+      "email": "Natus labore aliqua",
+      "phone": "Ut nostrum sed iusto",
+      "position": "Ex porro consequatur",
+      "startDate": "Magna tempore ut vo",
+      "contractType": "Choose a country",
+      "hourlyRate": "Quia laboriosam exe",
+      "weeklyHours": "Fuga Sit veniam ni",
+      "contractStatus": "Choose a country"
     }
   ]
 }

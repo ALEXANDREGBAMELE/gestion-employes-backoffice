@@ -102,7 +102,7 @@ export const navData: INavData[] = [
             {
                 title: 'List Users',
                 url: '/users/list',
-                badge: { count: 5, class: 'bg-red-500 text-white' }, // Badge pour les notifications
+                // badge: { count: 5, class: 'bg-red-500 text-white' },
             },
         ],
     },

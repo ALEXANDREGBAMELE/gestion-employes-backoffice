@@ -10,28 +10,33 @@ import { IFormItem } from '../../models/crud/formItem';
 export class CustomDynamicFormComponent implements OnInit, OnDestroy {
   @Input() formGroup!: FormGroup;
   @Input() formItems: IFormItem[] = [];
-  @Input() formControlName: string = ''; // Valeur par défaut pour éviter undefined
-  @Input() label: string = '';
   @Input() isRequired: boolean = false;
   @Input() disabled: boolean = false;
-  @Input() formData: { [key: string]: any } = {}; // Type explicite
+  @Input() formData: { [key: string]: any } = {};
   @Input() isViewDetails: boolean = false;
+  @Input() isSubmitted: boolean = false;
 
   @Output() formGroupChange = new EventEmitter<FormGroup>();
   @Output() formValuesChange = new EventEmitter<any>();
   @Output() valueChange = new EventEmitter<string>();
+  @Output() isModalOpen = new EventEmitter<boolean>()
+
+  @Output() formSubmit = new EventEmitter<any>();
 
   private subscriptions: Subscription = new Subscription();
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    console.log("Voici la valeur de formData : ", this.formData);
     // Initialisation du FormGroup
     this.formGroup = this.formGroup || this.fb.group({});
     this.initializeForm();
 
     // Appliquer les valeurs initiales
     if (this.formData) {
+      console.log("Voici la valeur de formData : ", this.formData);
+
       this.patchFormValues(this.formData);
     }
 
@@ -53,49 +58,84 @@ export class CustomDynamicFormComponent implements OnInit, OnDestroy {
       console.warn('Aucun élément de formulaire trouvé dans formItems.');
       return;
     }
-
+    //INITIALISATION DU FORMULAIRE DYNAMIQUE
+    const controls: any = {};
     this.formItems.forEach((item) => {
-      console.log("Voici item de formItems : ", item);
-      console.log("Voici item de formControlName : ", item.formControlName);
-
-      if (!item.formControlName) {
-        console.error('formControlName manquant pour un élément :', item);
-        return;
-      }
-
-      const control = this.fb.control(
+      controls[item.name] = [
         item.value || '',
         item.required ? Validators.required : null
-      );
-
-      this.formGroup.addControl(item.formControlName, control);
-      console.log("Voici le nouveau formGroup : ", this.formGroup.value);
-
+      ];
     });
+    this.formGroup = this.fb.group(controls);
   }
 
-  private patchFormValues(data: { [key: string]: any }): void {
+  // private patchFormValues(data: any): void {
+  //   if (!data || typeof data !== 'object') {
+  //     console.warn('Les données passées à patchFormValues ne sont pas valides :', data);
+  //     return;
+  //   }
+
+  //   // Obtenir les noms des contrôles dans le FormGroup
+  //   const formControls = Object.keys(this.formGroup.controls);
+
+  //   // Préparer les données à appliquer
+  //   const patchData: any = {};
+
+  //   formControls.forEach((controlName) => {
+  //     if (data.hasOwnProperty(controlName)) {
+  //       const value = data[controlName];
+  //       // Assurez-vous que la valeur n'est pas `null` ou `undefined`
+  //       patchData[controlName] = value !== null && value !== undefined ? value : '';
+  //     }
+  //   });
+
+  //   // Appliquer les données mises à jour au FormGroup
+  //   this.formGroup.patchValue(patchData);
+  // }
+
+  private patchFormValues(data: { [key: string]: any }) {
     this.formGroup.patchValue(data);
   }
 
-  get errorMessage(): string {
-    const control = this.formGroup.get(this.formControlName);
-    if (control?.hasError('required')) {
-      return `${this.label} is required.`;
-    }
-    return '';
-  }
 
-  onSubmit(): void {
-    if (this.formGroup.valid) {
-      console.log('Formulaire soumis avec succès :', this.formGroup.value);
-    } else {
-      console.error('Le formulaire est invalide :', this.formGroup.value);
-    }
-  }
+  // private patchFormValues(data: Record<string, any>): void {
+  //   if (!data || typeof data !== 'object') {
+  //     console.warn('Les données passées à patchFormValues ne sont pas valides :', data);
+  //     return;
+  //   }
+
+  //   Object.keys(data).forEach((key) => {
+  //     if (!this.formGroup.contains(key)) {
+  //       // Ajouter dynamiquement un contrôle s'il n'existe pas
+  //       this.formGroup.addControl(key, this.fb.control(data[key]));
+  //     } else {
+  //       // Mettre à jour le contrôle existant
+  //       this.formGroup.get(key)?.setValue(data[key], { emitEvent: false });
+  //     }
+  //   });
+
+  //   this.formGroup.updateValueAndValidity({ emitEvent: true });
+  // }
+
+
+
 
   onChange(value: string): void {
-    console.log('Valeur changée :', value);
     this.valueChange.emit(value);
+  }
+
+  onSubmit() {
+    this.isSubmitted = true
+    if (this.formGroup.valid) {
+      this.formSubmit.emit(this.formGroup);
+      this.isSubmitted = false
+    } else {
+      console.error('Formulaire invalide');
+      this.isSubmitted = false
+    }
+  }
+
+  onCancel() {
+    this.isModalOpen.emit(false)
   }
 }

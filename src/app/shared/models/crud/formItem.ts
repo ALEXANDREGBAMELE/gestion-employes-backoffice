@@ -5,7 +5,7 @@ export interface IFormItem {
     label?: string;
     formControlName?: string;
     formControl?: string;
-    name?: string;
+    name?: any;
     type?: FormsItemType;
     value?: any;
     placeholder?: string;
@@ -20,7 +20,7 @@ export interface IFormItem {
         // name?: string;
         action?: string;
         // value: string;
-        hasNotId?: boolean;
+        // hasNotId?: boolean;
     }
 
 }

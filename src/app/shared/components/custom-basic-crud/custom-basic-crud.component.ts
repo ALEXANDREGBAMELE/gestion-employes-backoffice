@@ -41,6 +41,7 @@ export class CustomBasicCrudComponent implements OnInit {
 
   actionName: string = '';
   entity: string = '';
+
   //PAGINATION
   itemsPerPage: number = 10;
   totalItems!: number;
@@ -82,8 +83,6 @@ export class CustomBasicCrudComponent implements OnInit {
         this.isLodingTableData = false;
       }
     }
-
-
     );
   }
 
@@ -154,8 +153,7 @@ export class CustomBasicCrudComponent implements OnInit {
   create() {
     this.openModal('create');
     this.actionName = 'Création';
-    const request = "";
-    this.apiService.post<any>(this.actionParam.create.endPoint, request)
+
   }
 
   editData(data: any) {
@@ -206,9 +204,10 @@ export class CustomBasicCrudComponent implements OnInit {
   }
 
   // // Méthode pour fermer le modal
-  closeModal() {
+  closeModal(event?: any) {
     this.isModalOpen = false;
     this.currentAction = 'create';
+    this.isModalOpen = event;
   }
 
   // Exemple de méthode pour confirmer la suppression
@@ -233,7 +232,7 @@ export class CustomBasicCrudComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("Voici la valeur de save Items : ", this.saveItems.value);
+    console.log("Voici la valeur de save Items : ", this.saveItems);
 
   }
 
@@ -263,6 +262,40 @@ export class CustomBasicCrudComponent implements OnInit {
   //   this.currentFormValues = values; // Mettez à jour les valeurs actuelles
   //   console.log('Valeurs du formulaire:', this.saveItems.value);
   // }
+
+  handleFormSubmit(formData: FormGroup) {
+    this.isSubmitted = true;
+    console.log('Données du formulaire soumises:', formData);
+
+    const request = formData.value;
+    this.apiService.post<any>(this.actionParam.create.endPoint, request).subscribe({
+      next: (response) => {
+        console.log("Voici la reponse : ", response);
+        this.isSubmitted = false;
+
+        // Attendre 1 seconde avant de fermer le modal
+        setTimeout(() => {
+          this.closeModal();
+          this.isToastOpen = true
+          this.message = " Opération éffectuée avec succès "
+          this.typeMessage = "success"
+          this.getItems()
+        }, 1000); // 1000 ms = 1 seconde
+      },
+      error: (err) => {
+        console.error("Message erreur : ", err);
+        this.isSubmitted = false;
+
+        // Attendre 1 seconde avant de fermer le modal
+        setTimeout(() => {
+          this.closeModal();
+          this.isToastOpen = true
+          this.message = " Opération echouée "
+          this.typeMessage = "error"
+        }, 1000); // 1000 ms = 1 seconde
+      }
+    });
+  }
 
 
 
