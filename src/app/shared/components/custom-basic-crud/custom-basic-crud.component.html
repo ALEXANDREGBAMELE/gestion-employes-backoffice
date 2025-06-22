@@ -1,60 +1,107 @@
 <form action="" class="flex justify-between w-full tw-mb-2">
-    <custom-input-search></custom-input-search>
-    <div class="flex gap-3">
-        <custom-button [label]="'Exporter'"></custom-button>
-        <custom-button (click)="create()" [label]="'Ajouter'"></custom-button>
-    </div>
-
+  <custom-input-search
+    [control]="searchControl"
+    (keyUp)="handleSearch($event)"
+  ></custom-input-search>
+  <div class="flex gap-3">
+    <custom-button [label]="'Exporter'"></custom-button>
+    <custom-button (click)="create()" [label]="'Ajouter'"></custom-button>
+  </div>
 </form>
-
-<custom-table [tableHeaderData]="columns" [tableBodyData]="items" [tableActionButtons]="tableActionButtons"
-    (onRowClick)="handleRowClick($event)" [isLoading]="isLodingTableData"></custom-table>
-<custom-pagination *ngIf=" items && items.length > 0"></custom-pagination>
+<!-- <p>{{items | json}}</p> -->
+<custom-table
+  [tableHeaderData]="columns"
+  [tableBodyData]="items"
+  [tableActionButtons]="tableActionButtons"
+  (onRowClick)="handleRowClick($event)"
+  [isLoading]="isLodingTableData"
+></custom-table>
+<custom-pagination
+  [currentPage]="page"
+  [itemsPerPage]="size"
+  [totalItems]="totalItems"
+  (onPaginationChange)="handlePaginationChange(page, size)"
+  *ngIf="items && items.length > 0"
+></custom-pagination>
 
 <!-- Gestion des modals -->
 
-<custom-modal [title]="actionName" *ngIf="isModalOpen" (closeModal)="closeModal()">
-    <!-- Utilisez ngSwitch pour basculer entre les différents contenus -->
-    <ng-container [ngSwitch]="currentAction">
-        <!-- Création / Modification -->
-        <ng-container *ngSwitchCase="'create'">
-            <custom-dynamic-form [formItems]="formItems" [formGroup]="saveItems" (formSubmit)="handleFormSubmit($event)"
-                [isSubmitted]="isSubmitted" (isModalOpen)="closeModal($event)"></custom-dynamic-form>
-        </ng-container>
+<custom-modal
+  [title]="actionName"
+  *ngIf="isModalOpen"
+  (closeModal)="closeModal()"
+>
+  <!-- Utilisez ngSwitch pour basculer entre les différents contenus -->
+  <ng-container [ngSwitch]="currentAction">
+    <!-- Création / Modification -->
+    <ng-container *ngSwitchCase="'create'">
+      <custom-dynamic-form
+        [formItems]="formItems"
+        [formGroup]="saveItems"
+        (formSubmit)="handleFormSubmit($event)"
+        [isSubmitted]="isSubmitted"
+        (isModalOpen)="closeModal($event)"
+      ></custom-dynamic-form>
+    </ng-container>
 
-
-        <ng-container *ngSwitchCase="'edit'">
-            <custom-dynamic-form [formData]="rowData" [formItems]="formItems" [formGroup]="saveItems"
-                (isModalOpen)="closeModal($event)"></custom-dynamic-form>
-            <!-- <div class="tw-flex tw-justify-end tw-gap-5">
+    <ng-container *ngSwitchCase="'edit'">
+      <custom-dynamic-form
+        [formData]="rowData"
+        [formItems]="formItems"
+        [formGroup]="saveItems"
+        [isSubmitted]="isSubmitted"
+        (isModalOpen)="closeModal($event)"
+      ></custom-dynamic-form>
+      <!-- <div class="tw-flex tw-justify-end tw-gap-5">
                 <custom-button (click)="closeModal()" [color]="'gray'" [label]="'Annuler'"></custom-button>
                 <custom-button (click)="onSubmit()" [label]="'Enregistrer'"></custom-button>
             </div> -->
-        </ng-container>
-
-        <!-- Suppression -->
-        <ng-container *ngSwitchCase="'delete'">
-            <p class="tw-text-lg tw-font-semibold tw-text-center tw-py-3">
-                Êtes-vous sûr de vouloir supprimer... ?
-            </p>
-            <div class="tw-flex tw-justify-end tw-space-x-4">
-                <custom-button [color]="'gray'" label="Non" [isSubmitted]="isSubmitted" size="medium"
-                    icon="ri-close-circle-line" iconPosition="left" [fullWidth]="true"
-                    (click)="closeModal()"></custom-button>
-
-                <custom-button [color]="'orange'" label="Oui" [isSubmitted]="isSubmitted" size="medium"
-                    icon="ri-check-line" iconPosition="left" [fullWidth]="true"
-                    (click)="confirmDelete(rowData)"></custom-button>
-            </div>
-        </ng-container>
-
-        <!-- Voir détails -->
-        <ng-container *ngSwitchCase="'details'">
-            <custom-dynamic-form [formData]="rowData" [isViewDetails]="true"
-                [formItems]="formItems"></custom-dynamic-form>
-        </ng-container>
     </ng-container>
+
+    <!-- Suppression -->
+    <ng-container *ngSwitchCase="'delete'">
+      <p class="tw-text-lg tw-font-semibold tw-text-center tw-py-3">
+        Êtes-vous sûr de vouloir supprimer... ?
+      </p>
+      <div class="tw-flex tw-justify-end tw-space-x-4">
+        <custom-button
+          [color]="'gray'"
+          label="Non"
+          [isSubmitted]="isSubmitted"
+          size="medium"
+          icon="ri-close-circle-line"
+          iconPosition="left"
+          [fullWidth]="true"
+          (click)="closeModal()"
+        ></custom-button>
+
+        <custom-button
+          [color]="'orange'"
+          label="Oui"
+          [isSubmitted]="isSubmitted"
+          size="medium"
+          icon="ri-check-line"
+          iconPosition="left"
+          [fullWidth]="true"
+          (click)="confirmDelete(rowData)"
+        ></custom-button>
+      </div>
+    </ng-container>
+
+    <!-- Voir détails -->
+    <ng-container *ngSwitchCase="'details'">
+      <custom-dynamic-form
+        [formData]="rowData"
+        [isViewDetails]="true"
+        [formItems]="formItems"
+      ></custom-dynamic-form>
+    </ng-container>
+  </ng-container>
 </custom-modal>
 
-<custom-toast-alert *ngIf="message" [message]="message" [isVisible]="isToastOpen"
-    [type]="typeMessage === 'success' ? 'success' : 'error'"></custom-toast-alert>
+<custom-toast-alert
+  *ngIf="message"
+  [message]="message"
+  [isVisible]="isToastOpen"
+  [type]="typeMessage === 'success' ? 'success' : 'error'"
+></custom-toast-alert>

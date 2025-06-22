@@ -1,6 +1,6 @@
 
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/core/services/api.service';
 import { IBasicCrudParams } from '../../models/crud/basic-crud-params';
 
@@ -43,11 +43,22 @@ export class CustomBasicCrudComponent implements OnInit {
   entity: string = '';
 
   //PAGINATION
-  itemsPerPage: number = 10;
-  totalItems!: number;
-  currentPage: number = 1;
+  @Input() size: number = 10;
+  @Input() totalItems!: number;
+  @Input() page: number = 0;
   // paginationOptions = paginationOptions;
 
+  // Recherche
+  @Input() searchByFullText: string | undefined;
+  @Input() requestParams!: {
+    keyword?: string;
+    page?: number;
+    size?: number;
+    sort?: string;
+    sortDir?: string;
+    [key: string]: any;
+  };
+  searchControl = new FormControl('');
   logChanges(updatedFormGroup: FormGroup) {
     console.log('FormGroup mis à jour dans le parent :', updatedFormGroup);
   }
@@ -58,6 +69,7 @@ export class CustomBasicCrudComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeComponent()
+
   }
 
   initializeComponent() {
@@ -72,19 +84,66 @@ export class CustomBasicCrudComponent implements OnInit {
 
 
   getItems() {
-    this.isLodingTableData = true
-    this.apiService.get(this.basicCrudParams.endPoint ?? '404', { page: 1, limit: 10 }).subscribe({
+    this.isLodingTableData = true;
+
+    const queryParams = new URLSearchParams();
+
+    Object.entries(this.requestParams || {}).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') {
+        queryParams.set(key, value.toString());
+      }
+    });
+
+    const url = `${this.basicCrudParams.endPoint}?${queryParams.toString()}`;
+
+    this.apiService.get(url, {}).subscribe({
       next: (data: any) => {
-        this.items = data;
+        this.items = data.content;
+        this.page = data.number + 1;
+        this.size = data.size;
+        this.totalItems = data.totalElements ?? data.totalItems ?? 0; // pagination éventuelle
         this.isLodingTableData = false;
       },
       error: (error) => {
         console.error('Error:', error);
         this.isLodingTableData = false;
       }
-    }
-    );
+    });
   }
+
+  handleSearch(keyword: string) {
+    this.requestParams = {
+      ...this.requestParams,
+      keyword: keyword,
+      page: 0, // reset page lors de la recherche
+    };
+    this.getItems();
+  }
+
+  handlePaginationChange(page: number, size: number) {
+
+    this.requestParams = {
+      ...this.requestParams,
+      page: this.page - 1,
+      size,
+    };
+    this.getItems();
+  }
+
+
+  handleSort(sort: string, sortDir: string) {
+    this.requestParams = {
+      ...this.requestParams,
+      sort,
+      sortDir,
+    };
+    this.getItems();
+  }
+
+
+
+
+
 
   // Handle button click
   // onButtonClick(action: string) {
@@ -265,37 +324,42 @@ export class CustomBasicCrudComponent implements OnInit {
 
   handleFormSubmit(formData: FormGroup) {
     this.isSubmitted = true;
-    console.log('Données du formulaire soumises:', formData);
-
     const request = formData.value;
-    this.apiService.post<any>(this.actionParam.create.endPoint, request).subscribe({
+    const isUpdate = !!request.id;
+
+    const endPoint = isUpdate ? this.actionParam.update.endPoint : this.actionParam.create.endPoint;
+
+    const apiCall = isUpdate
+      ? this.apiService.put<any>(endPoint, request)
+      : this.apiService.post<any>(endPoint, request);
+
+    apiCall.subscribe({
       next: (response) => {
-        console.log("Voici la reponse : ", response);
+        console.log("Réponse reçue :", response);
         this.isSubmitted = false;
 
-        // Attendre 1 seconde avant de fermer le modal
         setTimeout(() => {
           this.closeModal();
-          this.isToastOpen = true
-          this.message = " Opération éffectuée avec succès "
-          this.typeMessage = "success"
-          this.getItems()
-        }, 1000); // 1000 ms = 1 seconde
+          this.isToastOpen = true;
+          this.message = isUpdate ? "Mise à jour effectuée avec succès" : "Création effectuée avec succès";
+          this.typeMessage = "success";
+          this.getItems();
+        }, 1000);
       },
       error: (err) => {
-        console.error("Message erreur : ", err);
+        console.error("Erreur API :", err);
         this.isSubmitted = false;
 
-        // Attendre 1 seconde avant de fermer le modal
         setTimeout(() => {
           this.closeModal();
-          this.isToastOpen = true
-          this.message = " Opération echouée "
-          this.typeMessage = "error"
-        }, 1000); // 1000 ms = 1 seconde
+          this.isToastOpen = true;
+          this.message = "Opération échouée";
+          this.typeMessage = "error";
+        }, 1000);
       }
     });
   }
+
 
 
 

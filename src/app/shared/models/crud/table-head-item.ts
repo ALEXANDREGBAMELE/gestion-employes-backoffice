@@ -1,6 +1,6 @@
 export interface ITableHeadItem {
     name: string,
     value: any,
-    concat?: string[],
+    concatItems?: any[],
     type: string,
 }

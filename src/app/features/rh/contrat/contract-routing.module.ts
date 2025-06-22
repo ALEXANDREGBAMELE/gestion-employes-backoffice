@@ -8,11 +8,10 @@ import { TypeContractComponent } from './type-contract/type-contract.component';
 const routes: Routes = [
   {
     path: "",
-    data: { breadcrumb: 'Contract' },
     component: ContractComponent,
     children: [
       {
-        path: "list",
+        path: "",
         data: { breadcrumb: 'Liste' },
         component: ListContractComponent
       },

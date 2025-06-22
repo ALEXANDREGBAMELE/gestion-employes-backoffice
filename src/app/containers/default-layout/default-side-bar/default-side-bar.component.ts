@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DrawerService } from 'src/app/core/services/drawer.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
-import { navData } from '../../nav';
+import { INavData, navData } from '../../nav';
 @Component({
   selector: 'app-default-side-bar',
   templateUrl: './default-side-bar.component.html',
@@ -61,6 +61,24 @@ export class DefaultSideBarComponent implements OnInit {
   toggleDropdown(item: any): void {
     item.isOpen = !item.isOpen;
   }
+
+
+  handleItemClick(item: any, list: INavData[]): void {
+    if (item.children?.length) {
+      // Si c'est un élément avec enfants → fermer tous ses frères au même niveau
+      list.forEach((i) => {
+        if (i !== item) {
+          i.isOpen = false;
+        }
+      });
+      // Toggle celui-ci
+      item.isOpen = !item.isOpen;
+    } else {
+      // Si c'est un lien sans enfant → comportement normal
+      this.closeDrawerOnNavigate(item.url);
+    }
+  }
+
 
   toggleTheme(): void {
     this.isDarkMode = !this.isDarkMode;

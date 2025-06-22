@@ -1,9 +1,9 @@
-<nav
+<!-- <nav
   class="tw-fixed tw-top-0 tw-z-40 tw-w-full tw-bg-white tw-shadow tw-border-gray-200 tw-dark:bg-gray-700 tw-dark:border-gray-700"
   [ngClass]="isFullScreen ? 'tw-ml-60' : 'tw-ml-0'">
   <div class="tw-px-3 tw-py-3 lg:tw-px-5 lg:tw-pl-3">
     <div class="tw-flex tw-items-center tw-justify-between">
-      <!-- Logo & Sidebar Toggle -->
+      <-- Logo & Sidebar Toggle ->
       <div class="tw-hidden sm:tw-inline-flex tw-items-center">
         <span>
           <button (click)="toggleIcon()"
@@ -11,10 +11,10 @@
             <i [ngClass]="isLeftIconVisible ? 'ri-arrow-left-wide-line' : 'ri-arrow-right-wide-line'"></i>
           </button>
         </span>
-        <!-- <span class="tw-font-semibold tw-text-gray-800 tw-dark:text-white">Logo</span> -->
+        <span class="tw-font-semibold tw-text-gray-800 tw-dark:text-white">Logo</span>
       </div>
 
-      <!-- Mobile Sidebar Button -->
+      <-- Mobile Sidebar Button ->
       <div class="tw-flex tw-items-center tw-justify-start tw-rtl:tw-justify-end">
         <button type="button" (click)="toggleSidebar()"
           class="tw-inline-flex tw-items-center tw-p-2 tw-text-sm tw-text-gray-500 tw-rounded-lg sm:tw-hidden tw-hover:bg-gray-100 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-gray-200 tw-dark:text-gray-400 tw-dark:hover:bg-gray-700 tw-dark:focus:tw-ring-gray-600">
@@ -28,7 +28,7 @@
         </button>
       </div>
 
-      <!-- User Menu -->
+      <-- User Menu --
       <div class="tw-flex tw-items-center">
         <div class="tw-flex tw-items-center tw-ms-3">
           <div>
@@ -79,4 +79,89 @@
     </div>
   </div>
   <app-breadcrumb></app-breadcrumb>
+</nav> -->
+
+<nav class="tw-fixed tw-top-0 tw-z-40 tw-w-full tw-bg-white tw-border-gray-200 dark:tw-bg-gray-900">
+  <div class="tw-max-w-screen-xl tw-flex tw-flex-wrap tw-items-center tw-justify-between tw-mx-auto tw-p-4">
+    <a href="https://flowbite.com/" class="tw-flex tw-items-center tw-space-x-3 rtl:tw-space-x-reverse">
+      <img src="https://flowbite.com/docs/images/logo.svg" class="tw-h-8" alt="Flowbite Logo" />
+      <span class="tw-self-center tw-text-2xl tw-font-semibold tw-whitespace-nowrap dark:tw-text-white">Flowbite</span>
+    </a>
+    <div class="tw-flex tw-items-center md:tw-order-2 tw-space-x-3 md:tw-space-x-0 rtl:tw-space-x-reverse">
+      <button type="button"
+        class="tw-flex tw-text-sm tw-bg-gray-800 tw-rounded-full md:tw-me-0 focus:tw-ring-4 focus:tw-ring-gray-300 dark:focus:tw-ring-gray-600"
+        id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+        data-dropdown-placement="bottom">
+        <span class="tw-sr-only">Open user menu</span>
+        <img class="tw-w-8 tw-h-8 tw-rounded-full"
+          src="../../../../assets/images/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"
+          alt="user photo">
+      </button>
+      <!-- Dropdown menu -->
+      <div
+        class="tw-z-50 tw-hidden tw-my-4 tw-text-base tw-list-none tw-bg-white tw-divide-y tw-divide-gray-100 tw-rounded-lg tw-shadow-sm dark:tw-bg-gray-700 dark:tw-divide-gray-600"
+        id="user-dropdown">
+        <div class="tw-px-4 tw-py-3">
+          <span class="tw-block tw-text-sm tw-text-gray-900 dark:tw-text-white">Bonnie Green</span>
+          <span class="tw-block tw-text-sm tw-text-gray-500 tw-truncate dark:tw-text-gray-400">name@flowbite.com</span>
+        </div>
+        <ul class="tw-py-2" aria-labelledby="user-menu-button">
+          <li>
+            <a href="#"
+              class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:tw-text-gray-200 dark:hover:tw-text-white">Dashboard</a>
+          </li>
+          <li>
+            <a href="#"
+              class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:tw-text-gray-200 dark:hover:tw-text-white">Settings</a>
+          </li>
+          <li>
+            <a href="#"
+              class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:tw-text-gray-200 dark:hover:tw-text-white">Earnings</a>
+          </li>
+          <li>
+            <a href="#"
+              class="tw-block tw-px-4 tw-py-2 tw-text-sm tw-text-gray-700 hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600 dark:tw-text-gray-200 dark:hover:tw-text-white">Sign
+              out</a>
+          </li>
+        </ul>
+      </div>
+      <button data-collapse-toggle="navbar-user" type="button"
+        class="tw-inline-flex tw-items-center tw-p-2 tw-w-10 tw-h-10 tw-justify-center tw-text-sm tw-text-gray-500 tw-rounded-lg md:tw-hidden hover:tw-bg-gray-100 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-gray-200 dark:tw-text-gray-400 dark:hover:tw-bg-gray-700 dark:focus:tw-ring-gray-600"
+        aria-controls="navbar-user" aria-expanded="false">
+        <span class="tw-sr-only">Open main menu</span>
+        <svg class="tw-w-5 tw-h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M1 1h15M1 7h15M1 13h15" />
+        </svg>
+      </button>
+    </div>
+    <!-- <div class="tw-items-center tw-justify-between tw-hidden tw-w-full md:tw-flex md:tw-w-auto md:tw-order-1"
+      id="navbar-user">
+      <ul
+        class="tw-flex tw-flex-col tw-font-medium tw-p-4 md:tw-p-0 tw-mt-4 tw-border tw-border-gray-100 tw-rounded-lg tw-bg-gray-50 md:tw-space-x-8 rtl:tw-space-x-reverse md:tw-flex-row md:tw-mt-0 md:tw-border-0 md:tw-bg-white dark:tw-bg-gray-800 md:dark:tw-bg-gray-900 dark:tw-border-gray-700">
+        <li>
+          <a href="#"
+            class="tw-block tw-py-2 tw-px-3 tw-text-white tw-bg-blue-700 tw-rounded-sm md:tw-bg-transparent md:tw-text-blue-700 md:tw-p-0 md:dark:tw-text-blue-500"
+            aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="#"
+            class="tw-block tw-py-2 tw-px-3 tw-text-gray-900 tw-rounded-sm hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-white md:dark:hover:tw-text-blue-500 dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent dark:tw-border-gray-700">About</a>
+        </li>
+        <li>
+          <a href="#"
+            class="tw-block tw-py-2 tw-px-3 tw-text-gray-900 tw-rounded-sm hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-white md:dark:hover:tw-text-blue-500 dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent dark:tw-border-gray-700">Services</a>
+        </li>
+        <li>
+          <a href="#"
+            class="tw-block tw-py-2 tw-px-3 tw-text-gray-900 tw-rounded-sm hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-white md:dark:hover:tw-text-blue-500 dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent dark:tw-border-gray-700">Pricing</a>
+        </li>
+        <li>
+          <a href="#"
+            class="tw-block tw-py-2 tw-px-3 tw-text-gray-900 tw-rounded-sm hover:tw-bg-gray-100 md:hover:tw-bg-transparent md:hover:tw-text-blue-700 md:tw-p-0 dark:tw-text-white md:dark:hover:tw-text-blue-500 dark:hover:tw-bg-gray-700 dark:hover:tw-text-white md:dark:hover:tw-bg-transparent dark:tw-border-gray-700">Contact</a>
+        </li>
+      </ul>
+    </div> -->
+  </div>
 </nav>

@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: "",
     data: { breadcrumb: 'Login' },
-    loadChildren: () => import('./views/auth/auth.module').then((m) => m.AuthModule)
+    loadChildren: () => import('./features/auth/auth.module').then((m) => m.AuthModule)
   },
   {
     path: "", component: DefaultLayoutComponent,
@@ -16,28 +16,18 @@ const routes: Routes = [
       {
         path: "dashboard",
         data: { breadcrumb: 'Dashbord' },
-        loadChildren: () => import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+        loadChildren: () => import('./features/dashboard/dashboard.module').then((m) => m.DashboardModule)
       },
       {
-        path: "users",
+        path: "admin/users",
         data: { breadcrumb: 'User' },
-        loadChildren: () => import('./views/user/user.module').then((m) => m.UserModule)
+        loadChildren: () => import('./features/user/user.module').then((m) => m.UserModule)
       },
       {
-        path: "contract",
+        path: "rh",
         data: { breadcrumb: 'RH' },
-        loadChildren: () => import('./views/contrat/contract.module').then((m) => m.ContratModule)
+        loadChildren: () => import('./features/rh/rh.module').then((m) => m.RhModule)
       },
-      {
-        path: "employee",
-        data: { breadcrumb: 'RH' },
-        loadChildren: () => import('./views/employee/employee.module').then((m) => m.EmployeeModule)
-      },
-      {
-        path: "parametre",
-        data: { breadcrumb: 'Paramètre' },
-        loadChildren: () => import('./views/setting/setting.module').then((m) => m.SettingModule)
-      }
     ]
   },
 ];

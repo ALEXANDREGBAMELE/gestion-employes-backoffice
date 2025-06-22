@@ -3,34 +3,59 @@
   <div class="tw-flex tw-items-center tw-gap-2">
     <div class="">Résultats par page</div>
     <div class="tw-w-24">
-      <custom-dropdown-select iconPosition="right" [items]="paginationOptions"
+      <custom-dropdown-select
+        iconPosition="right"
+        [items]="paginationOptions"
         customClasses="tw-mb-4 tw-text-sm"
-        (onChange)="handleSelectChange($event)"></custom-dropdown-select>
+        (onChange)="updatePagination('size', $event)"
+      >
+      </custom-dropdown-select>
     </div>
 
-    <div class="">{{ ((currentPage - 1) * itemsPerPage + 1) }}-{{ Math.min(currentPage * itemsPerPage,
-      totalItems) }} sur {{ totalItems }}</div>
+    <div class="">
+      {{ (currentPage - 1) * itemsPerPage + 1 }} -
+      {{ math.min(currentPage * itemsPerPage, totalItems) }} sur
+      {{ totalItems }}
+    </div>
   </div>
 
   <!-- Pagination Controls -->
   <div class="tw-flex tw-gap-2 tw-items-center">
     <!-- First page -->
-    <button (click)="firstPage()" class="tw-px-3 tw-py-2 tw-rounded hover:tw-bg-gray-300 focus:tw-outline-none">
+    <button
+      (click)="updatePagination('page', 1)"
+      class="tw-px-3 tw-py-2 tw-rounded hover:tw-bg-gray-300 focus:tw-outline-none"
+    >
       <i class="ri-rewind-line"></i>
     </button>
     <!-- Previous page -->
-    <button (click)="previousPage()" class="tw-px-3 tw-py-2 tw-rounded hover:tw-bg-gray-300 focus:tw-outline-none">
+    <button
+      (click)="updatePagination('page', currentPage - 1)"
+      class="tw-px-3 tw-py-2 tw-rounded hover:tw-bg-gray-300 focus:tw-outline-none"
+    >
       <i class="ri-arrow-left-s-line"></i>
     </button>
+
     <!-- Current page -->
-    <div class="tw-border tw-border-gray-300 tw-rounded-full tw-px-3 tw-py-1 tw-bg-[#FF3C00] hover:tw-bg-orange-600 tw-text-white">{{ currentPage }}
+    <div
+      class="tw-border tw-border-gray-300 tw-rounded-full tw-px-3 tw-py-1 tw-bg-[#2563EB] hover:tw-bg-blue-700 tw-text-white"
+    >
+      {{ currentPage }}
     </div>
+
     <!-- Next page -->
-    <button (click)="nextPage()" class="tw-px-3 tw-py-2 tw-rounded hover:tw-bg-gray-300 focus:tw-outline-none">
+    <button
+      (click)="updatePagination('page', currentPage + 1)"
+      class="tw-px-3 tw-py-2 tw-rounded hover:tw-bg-gray-300 focus:tw-outline-none"
+    >
       <i class="ri-arrow-right-s-line"></i>
     </button>
+
     <!-- Last page -->
-    <button (click)="lastPage()" class="tw-px-3 tw-py-2 tw-rounded hover:tw-bg-gray-300 focus:tw-outline-none">
+    <button
+      (click)="updatePagination('page', totalPages)"
+      class="tw-px-3 tw-py-2 tw-rounded hover:tw-bg-gray-300 focus:tw-outline-none"
+    >
       <i class="ri-speed-line"></i>
     </button>
   </div>

@@ -1,132 +1,245 @@
 <!-- Overlay -->
-<div *ngIf="isOpen" (click)="closeDrawer()" class="tw-fixed tw-inset-0 tw-bg-black tw-bg-opacity-50 tw-z-40"></div>
+<div
+  *ngIf="isOpen"
+  (click)="closeDrawer()"
+  class="tw-fixed tw-inset-0 tw-bg-black tw-bg-opacity-50 tw-z-40"
+></div>
 
-<aside [ngClass]="{
+<aside
+  [ngClass]="{
     'tw-translate-x-0': isOpen,
     'tw--translate-x-full': !isOpen
   }"
-    class="tw-fixed tw-top-0 tw-left-0 tw-z-40 tw-w-60 tw-h-screen tw-transition-transform tw--translate-x-full tw-border-gray-200 sm:tw-translate-x-0 tw-bg-blue-900 dark:tw-bg-blue-900 dark:tw-border-gray-700"
-    aria-label="Sidebar">
+  class="tw-fixed tw-top-0 tw-left-0 tw-z-40 tw-w-60 tw-h-screen tw-transition-transform tw--translate-x-full tw-border-gray-200 sm:tw-translate-x-0 tw-bg-blue-900 dark:tw-bg-blue-900 dark:tw-border-gray-700"
+  aria-label="Sidebar"
+>
+  <!-- Logo section -->
+  <div class="tw-flex tw-items-center tw-justify-start ms-2 tw-pt-3">
+    <a
+      href="/dashboard"
+      class="tw-flex tw-items-center tw-text-white tw-text-xl tw-font-semibold tw-text-gray-900 dark:tw-text-white"
+    >
+      <img
+        class="tw-rounded-lg tw-shadow tw-h-8 tw-max-w-full tw-max-h-full tw-mr-2"
+        src="../../../../assets/images/icons_logos/logo_GesEmploy.png"
+        alt="logo"
+      />
+      GesEmploy
+    </a>
+  </div>
 
-    <!-- Logo section -->
-    <div class="tw-flex tw-items-center tw-justify-start ms-2 tw-pt-3 ">
-        <a href="/dashboard"
-            class="tw-flex tw-items-center tw-text-white tw-text-xl tw-font-semibold tw-text-gray-900 dark:tw-text-white">
-            <img class="tw-rounded-lg tw-shadow tw-h-8 tw-max-w-full tw-max-h-full tw-mr-2"
-                src="../../../../assets/images/icons_logos/logo_GesEmploy.png" alt="logo">
-            GesEmploy
+  <!-- Navigation Items -->
+  <div
+    class="tw-h-full tw-pb-4 tw-pt-3 tw-overflow-y-auto tw-bg-blue-900 dark:tw-bg-blue-900"
+  >
+    <ul class="tw-space-y-2 tw-font-medium">
+      <li *ngFor="let item of navItems">
+        <a
+          *ngIf="!item.disabled"
+          [routerLink]="item.url"
+          routerLinkActive="active"
+          (click)="handleItemClick(item, navItems || [])"
+          class="tw-flex tw-items-center tw-gap-1 tw-p-2 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group"
+        >
+          <i *ngIf="item.icon" [class]="item.icon"></i> {{ item.title }}
+          <span *ngIf="item.badge" [class]="item.badge.class">{{
+            item.badge.count
+          }}</span>
+
+          <!-- Toggle button for dropdown if children exist -->
+          <button
+            *ngIf="item.children?.length"
+            (click)="
+              handleItemClick(item, navItems || []); $event.stopPropagation()
+            "
+            type="button"
+            class="tw-ml-auto tw-text-gray-400 hover:tw-text-gray-500 dark:hover:tw-text-white"
+          >
+            <i
+              [class]="
+                item.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'
+              "
+            ></i>
+          </button>
         </a>
-    </div>
 
-    <!-- Navigation Items -->
-    <div class="tw-h-full tw-pb-4 tw-pt-3 tw-overflow-y-auto tw-bg-blue-900 dark:tw-bg-blue-900">
-        <ul class="tw-space-y-2 tw-font-medium">
-            <li *ngFor="let item of navItems">
-                <a *ngIf="!item.disabled" [routerLink]="item.url" routerLinkActive="active"
-                    (click)="closeDrawerOnNavigate(item.url)"
-                    class="tw-flex tw-items-center tw-gap-1 tw-p-2 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group">
-                    <i *ngIf="item.icon" [class]="item.icon"></i> {{ item.title }}
-                    <span *ngIf="item.badge" [class]="item.badge.class">{{ item.badge.count }}</span>
+        <!-- Recursive dropdown for nested children (Level 1) -->
+        <ul
+          *ngIf="item.children?.length && item.isOpen"
+          class="tw-space-y-2 tw-font-medium"
+        >
+          <li *ngFor="let child of item.children">
+            <a
+              [routerLink]="child.url"
+              routerLinkActive="active"
+              (click)="handleItemClick(child, item.children || [])"
+              class="tw-flex tw-items-center tw-p-2 tw-pl-8 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group"
+            >
+              <i *ngIf="child.icon" [class]="child.icon"></i> {{ child.title }}
+              <span *ngIf="child.badge" [class]="child.badge.class">{{
+                child.badge.count
+              }}</span>
 
-                    <!-- Toggle button for dropdown if children exist -->
-                    <button *ngIf="item.children?.length" (click)="toggleDropdown(item)" type="button"
-                        class="tw-ml-auto tw-text-gray-400 hover:tw-text-gray-500 dark:hover:tw-text-white">
-                        <i [class]="item.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
-                    </button>
+              <!-- Toggle button for nested dropdown if child has its own children -->
+              <button
+                *ngIf="child.children?.length"
+                (click)="
+                  handleItemClick(child, item.children || []);
+                  $event.stopPropagation()
+                "
+                type="button"
+                class="tw-ml-auto tw-text-gray-400 hover:tw-text-gray-500 dark:hover:tw-text-white"
+              >
+                <i
+                  [class]="
+                    child.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'
+                  "
+                ></i>
+              </button>
+            </a>
+
+            <!-- Recursive dropdown for Level 2 -->
+            <ul
+              *ngIf="child.children?.length && child.isOpen"
+              class="tw-space-y-2 tw-font-medium"
+            >
+              <li *ngFor="let subChild of child.children">
+                <a
+                  [routerLink]="subChild.url"
+                  routerLinkActive="active"
+                  (click)="handleItemClick(subChild, child.children || [])"
+                  class="tw-flex tw-items-center tw-p-2 tw-pl-11 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group"
+                >
+                  <i *ngIf="subChild.icon" [class]="subChild.icon"></i>
+                  {{ subChild.title }}
+                  <span *ngIf="subChild.badge" [class]="subChild.badge.class">{{
+                    subChild.badge.count
+                  }}</span>
+
+                  <!-- Toggle button for Level 3 -->
+                  <button
+                    *ngIf="subChild.children?.length"
+                    (click)="
+                      handleItemClick(subChild, child.children || []);
+                      $event.stopPropagation()
+                    "
+                    type="button"
+                    class="tw-ml-auto tw-text-gray-400 hover:tw-text-gray-500 dark:hover:tw-text-white"
+                  >
+                    <i
+                      [class]="
+                        subChild.isOpen
+                          ? 'ri-arrow-up-s-line'
+                          : 'ri-arrow-down-s-line'
+                      "
+                    ></i>
+                  </button>
                 </a>
 
-                <!-- Recursive dropdown for nested children (Level 1) -->
-                <ul *ngIf="item.children?.length && item.isOpen" class="tw-space-y-2 tw-font-medium">
-                    <li *ngFor="let child of item.children">
-                        <a [routerLink]="child.url" routerLinkActive="active" (click)="closeDrawerOnNavigate(child.url)"
-                            class="tw-flex tw-items-center tw-p-2 tw-pl-8 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group">
-                            <i *ngIf="child.icon" [class]="child.icon"></i> {{ child.title }}
-                            <span *ngIf="child.badge" [class]="child.badge.class">{{ child.badge.count }}</span>
+                <!-- Recursive dropdown for Level 4 -->
+                <ul
+                  *ngIf="subChild.children?.length && subChild.isOpen"
+                  class="tw-space-y-2 tw-font-medium"
+                >
+                  <li *ngFor="let fourthChild of subChild.children">
+                    <a
+                      [routerLink]="fourthChild.url"
+                      routerLinkActive="active"
+                      (click)="
+                        handleItemClick(fourthChild, subChild.children || [])
+                      "
+                      class="tw-flex tw-items-center tw-p-2 tw-pl-14 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group"
+                    >
+                      <i
+                        *ngIf="fourthChild.icon"
+                        [class]="fourthChild.icon"
+                      ></i>
+                      {{ fourthChild.title }}
+                      <span
+                        *ngIf="fourthChild.badge"
+                        [class]="fourthChild.badge.class"
+                        >{{ fourthChild.badge.count }}</span
+                      >
 
-                            <!-- Toggle button for nested dropdown if child has its own children -->
-                            <button *ngIf="child.children?.length" (click)="toggleDropdown(child)" type="button"
-                                class="tw-ml-auto tw-text-gray-400 hover:tw-text-gray-500 dark:hover:tw-text-white">
-                                <i [class]="child.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
-                            </button>
+                      <!-- Toggle button for Level 5 -->
+                      <button
+                        *ngIf="fourthChild.children?.length"
+                        (click)="
+                          handleItemClick(fourthChild, subChild.children || []);
+                          $event.stopPropagation()
+                        "
+                        type="button"
+                        class="tw-ml-auto tw-text-gray-400 hover:tw-text-gray-500 dark:hover:tw-text-white"
+                      >
+                        <i
+                          [class]="
+                            fourthChild.isOpen
+                              ? 'ri-arrow-up-s-line'
+                              : 'ri-arrow-down-s-line'
+                          "
+                        ></i>
+                      </button>
+                    </a>
+
+                    <!-- Recursive dropdown for Level 5 -->
+                    <ul
+                      *ngIf="fourthChild.children?.length && fourthChild.isOpen"
+                      class="tw-space-y-2 tw-font-medium"
+                    >
+                      <li *ngFor="let fifthChild of fourthChild.children">
+                        <a
+                          [routerLink]="fifthChild.url"
+                          routerLinkActive="active"
+                          (click)="
+                            handleItemClick(
+                              fifthChild,
+                              fourthChild.children || []
+                            )
+                          "
+                          class="tw-flex tw-items-center tw-p-2 tw-pl-17 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group"
+                        >
+                          <i
+                            *ngIf="fifthChild.icon"
+                            [class]="fifthChild.icon"
+                          ></i>
+                          {{ fifthChild.title }}
+                          <span
+                            *ngIf="fifthChild.badge"
+                            [class]="fifthChild.badge.class"
+                            >{{ fifthChild.badge.count }}</span
+                          >
                         </a>
-
-                        <!-- Recursive dropdown for Level 2 -->
-                        <ul *ngIf="child.children?.length && child.isOpen" class="tw-space-y-2 tw-font-medium">
-                            <li *ngFor="let subChild of child.children">
-                                <a [routerLink]="subChild.url" routerLinkActive="active"
-                                    (click)="closeDrawerOnNavigate(subChild.url)"
-                                    class="tw-flex tw-items-center tw-p-2 tw-pl-11 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group">
-                                    <i *ngIf="subChild.icon" [class]="subChild.icon"></i> {{ subChild.title }}
-                                    <span *ngIf="subChild.badge" [class]="subChild.badge.class">{{ subChild.badge.count
-                                        }}</span>
-
-                                    <!-- Toggle button for Level 3 -->
-                                    <button *ngIf="subChild.children?.length" (click)="toggleDropdown(subChild)"
-                                        type="button"
-                                        class="tw-ml-auto tw-text-gray-400 hover:tw-text-gray-500 dark:hover:tw-text-white">
-                                        <i
-                                            [class]="subChild.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
-                                    </button>
-                                </a>
-
-                                <!-- Recursive dropdown for Level 4 -->
-                                <ul *ngIf="subChild.children?.length && subChild.isOpen"
-                                    class="tw-space-y-2 tw-font-medium">
-                                    <li *ngFor="let fourthChild of subChild.children">
-                                        <a [routerLink]="fourthChild.url" routerLinkActive="active"
-                                            (click)="closeDrawerOnNavigate(fourthChild.url)"
-                                            class="tw-flex tw-items-center tw-p-2 tw-pl-14 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group">
-                                            <i *ngIf="fourthChild.icon" [class]="fourthChild.icon"></i> {{
-                                            fourthChild.title
-                                            }}
-                                            <span *ngIf="fourthChild.badge" [class]="fourthChild.badge.class">{{
-                                                fourthChild.badge.count
-                                                }}</span>
-
-                                            <!-- Toggle button for Level 5 -->
-                                            <button *ngIf="fourthChild.children?.length"
-                                                (click)="toggleDropdown(fourthChild)" type="button"
-                                                class="tw-ml-auto tw-text-gray-400 hover:tw-text-gray-500 dark:hover:tw-text-white">
-                                                <i
-                                                    [class]="fourthChild.isOpen ? 'ri-arrow-up-s-line' : 'ri-arrow-down-s-line'"></i>
-                                            </button>
-                                        </a>
-
-                                        <!-- Recursive dropdown for Level 5 -->
-                                        <ul *ngIf="fourthChild.children?.length && fourthChild.isOpen"
-                                            class="tw-space-y-2 tw-font-medium">
-                                            <li *ngFor="let fifthChild of fourthChild.children">
-                                                <a [routerLink]="fifthChild.url" routerLinkActive="active"
-                                                    (click)="closeDrawerOnNavigate(fifthChild.url)"
-                                                    class="tw-flex tw-items-center tw-p-2 tw-pl-17 tw-text-gray-50 dark:tw-text-white hover:tw-bg-blue-500 hover:tw-text-white dark:hover:tw-bg-gray-700 tw-group">
-                                                    <i *ngIf="fifthChild.icon" [class]="fifthChild.icon"></i> {{
-                                                    fifthChild.title }}
-                                                    <span *ngIf="fifthChild.badge" [class]="fifthChild.badge.class">{{
-                                                        fifthChild.badge.count
-                                                        }}</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
-            </li>
+              </li>
+            </ul>
+          </li>
         </ul>
-    </div>
+      </li>
+    </ul>
+  </div>
 
-
-    <!-- Theme Toggle Button (fixed at the bottom) -->
-    <div class="tw-absolute tw-bottom-4 tw-w-full tw-px-4">
-        <button (click)="toggleTheme()"
-            class="tw-flex tw-items-center tw-justify-center tw-w-full tw-p-2 tw-bg-gray-200 dark:tw-bg-gray-600 tw-rounded-lg hover:tw-bg-gray-300 dark:hover:tw-bg-gray-700 tw-transition-colors tw-duration-200">
-            <i *ngIf="isDarkMode" class="ri-sun-line tw-text-yellow-400 tw-text-xl"></i>
-            <i *ngIf="!isDarkMode" class="ri-moon-line tw-text-gray-900 dark:tw-text-gray-100 tw-text-xl"></i>
-            <span class="tw-ml-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-gray-100">
-                {{ isDarkMode ? 'Mode Clair' : 'Mode Sombre' }}
-            </span>
-        </button>
-    </div>
+  <!-- Theme Toggle Button (fixed at the bottom) -->
+  <!-- <div class="tw-absolute tw-bottom-4 tw-w-full tw-px-4">
+    <button
+      (click)="toggleTheme()"
+      class="tw-flex tw-items-center tw-justify-center tw-w-full tw-p-2 tw-bg-gray-200 dark:tw-bg-gray-600 tw-rounded-lg hover:tw-bg-gray-300 dark:hover:tw-bg-gray-700 tw-transition-colors tw-duration-200"
+    >
+      <i
+        *ngIf="isDarkMode"
+        class="ri-sun-line tw-text-yellow-400 tw-text-xl"
+      ></i>
+      <i
+        *ngIf="!isDarkMode"
+        class="ri-moon-line tw-text-gray-900 dark:tw-text-gray-100 tw-text-xl"
+      ></i>
+      <span
+        class="tw-ml-2 tw-text-sm tw-font-medium tw-text-gray-900 dark:tw-text-gray-100"
+      >
+        {{ isDarkMode ? "Mode Clair" : "Mode Sombre" }}
+      </span>
+    </button>
+  </div> -->
 </aside>

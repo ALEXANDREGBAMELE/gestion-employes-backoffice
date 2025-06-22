@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IBasicCrudParams } from 'src/app/shared/models/crud/basic-crud-params';
 import { FormsItemType } from 'src/app/shared/models/crud/enums/forms-item-type.enum';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-employee-list',
@@ -21,18 +22,18 @@ export class EmployeeListComponent implements OnInit {
     this.basicCrudParams = {
       tableColumnItem: this.columns,
       formItems: this.formItems,
-      endPoint: "http://localhost:3000/employes",
+      endPoint: `${environment.BASE_URL}/employee/getAll`,
       actionParam: {
         create: {
-          endPoint: 'http://localhost:3000/employes',
+          endPoint: `${environment.BASE_URL}/employee/create`,
           action: ''
         },
         update: {
-          endPoint: '',
+          endPoint: `${environment.BASE_URL}/employee/update`,
           action: ''
         },
         delete: {
-          endPoint: 'http://localhost:3000/employes',
+          endPoint: `${environment.BASE_URL}/employee/delete`,
           action: ''
         },
         getDetail: {
@@ -45,60 +46,72 @@ export class EmployeeListComponent implements OnInit {
   }
 
   columns = [
-    { type: 'string', name: 'Nom et prénom', value: 'nom' },
+    { type: 'string', name: 'Nom et prénom', concatItems: ['firstName', 'lastName'] },
     { type: 'string', name: 'Email', value: 'email' },
-    { type: 'string', name: 'Fonction', value: 'fonction' },
-    { type: 'string', name: 'Date Embauche', value: 'dateEmbauche' },
-    { type: 'string', name: 'Salaire Annuel', value: 'salaireAnnuel' },
-    { type: 'string', name: 'Departement', value: 'departement' },
-    { type: 'string', name: 'Superviseur', value: 'superviseur' },
+    { type: 'string', name: 'Fonction', value: 'position' },
+    // { type: 'string', name: 'Date Embauche', value: 'dateEmbauche' },
+    // { type: 'string', name: 'Salaire Annuel', value: 'salaireAnnuel' },
+    // { type: 'string', name: 'Departement', value: 'departement' },
+    // { type: 'string', name: 'Superviseur', value: 'superviseur' },
+    { type: 'string', name: 'Téléphone', value: 'phoneNumber' },
     { type: 'string', name: 'Statut', value: 'statut' },
   ]
+
+  // columns = [
+  //   { type: 'string', name: 'Nom et prénom', value: 'nom' },
+  //   { type: 'string', name: 'Email', value: 'email' },
+  //   { type: 'string', name: 'Fonction', value: 'fonction' },
+  //   { type: 'string', name: 'Date Embauche', value: 'dateEmbauche' },
+  //   { type: 'string', name: 'Salaire Annuel', value: 'salaireAnnuel' },
+  //   { type: 'string', name: 'Departement', value: 'departement' },
+  //   { type: 'string', name: 'Superviseur', value: 'superviseur' },
+  //   { type: 'string', name: 'Statut', value: 'statut' },
+  // ]
   formItems = [
     {
-      type: FormsItemType.Input,
+      type: FormsItemType.TEXT,
       name: 'firstName',
       label: 'Prénom',
       placeholder: 'Entrez le prénom',
       validators: ['required', 'minLength:2']
     },
     {
-      type: FormsItemType.Input,
+      type: FormsItemType.TEXT,
       name: 'lastName',
       label: 'Nom',
       placeholder: 'Entrez le nom',
       validators: ['required', 'minLength:2']
     },
     {
-      type: FormsItemType.Input,
+      type: FormsItemType.TEXT,
       name: 'email',
       label: 'Email',
       placeholder: 'Entrez l\'email',
       validators: ['required', 'email']
     },
     {
-      type: FormsItemType.Input,
+      type: FormsItemType.TEXT,
       name: 'phone',
       label: 'Téléphone',
       placeholder: 'Entrez le numéro de téléphone',
       validators: ['required', 'pattern:^[0-9]{10,15}$']
     },
     {
-      type: FormsItemType.Input,
+      type: FormsItemType.TEXT,
       name: 'position',
       label: 'Fonction',
       placeholder: 'Entrez la fonction',
       validators: ['required']
     },
     {
-      type: FormsItemType.Date,
+      type: FormsItemType.DATE,
       name: 'startDate',
       label: 'Date de début',
       placeholder: 'Sélectionnez une date',
       validators: ['required']
     },
     {
-      type: FormsItemType.Select,
+      type: FormsItemType.SELECT,
       id: 'contractType',
       name: 'contractType',
       label: 'Type de contrat',
@@ -112,21 +125,21 @@ export class EmployeeListComponent implements OnInit {
       validators: ['required']
     },
     {
-      type: FormsItemType.Input,
+      type: FormsItemType.TEXT,
       name: 'hourlyRate',
       label: 'Taux horaire',
       placeholder: 'Entrez le taux horaire',
       validators: ['required', 'pattern:^[0-9]*\\.?[0-9]+$']
     },
     {
-      type: FormsItemType.Input,
+      type: FormsItemType.TEXT,
       name: 'weeklyHours',
       label: 'Temps de travail (/semaine)',
       placeholder: 'Entrez le nombre d\'heures par semaine',
       validators: ['required', 'pattern:^[0-9]+$']
     },
     {
-      type: FormsItemType.Select,
+      type: FormsItemType.SELECT,
       name: 'contractStatus',
       label: 'Statut du contrat',
       id: 'contractStatus',

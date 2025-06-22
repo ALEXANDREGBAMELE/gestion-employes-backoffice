@@ -8,55 +8,48 @@ export class CustomPaginationComponent implements OnInit {
   @Input() currentPage: number = 1;
   @Input() totalItems: number = 0;
   @Input() itemsPerPage: number = 10;
-  @Input() paginationOptions: any[] = [{ key: 5, value: 5 }, { key: 10, value: 10 }, { key: 20, value: 20 }, { key: 50, value: 50 }];
+  @Input() paginationOptions: any[] = [
+    { key: 5, value: 5 },
+    { key: 10, value: 10 },
+    { key: 20, value: 20 },
+    { key: 50, value: 50 },
+  ];
 
-  @Output() onPageChange: EventEmitter<number> = new EventEmitter<number>();
-  @Output() onItemsPerPageChange: EventEmitter<number> =
-    new EventEmitter<number>();
-
-  constructor() { }
-
+  @Output() onPaginationChange = new EventEmitter<{ page: number; size: number }>();
+  math = Math;
   ngOnInit(): void { }
 
-
   get totalPages(): number {
-    return Math.ceil(this.totalItems / this.itemsPerPage);
+    return Math.max(1, Math.ceil(this.totalItems / this.itemsPerPage));
   }
 
-  get Math() {
-    return Math;
+  get pageRangeStart(): number {
+    return (this.currentPage - 1) * this.itemsPerPage + 1;
   }
 
-  changePage(page: number) {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.onPageChange.emit(this.currentPage);
+  get pageRangeEnd(): number {
+    return Math.min(this.currentPage * this.itemsPerPage, this.totalItems);
+  }
+
+  updatePagination(type: 'page' | 'size', value: number) {
+    if (type === 'page') {
+      if (value >= 1 && value <= this.totalPages) {
+        this.currentPage = value;
+      }
     }
-  }
 
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.changePage(this.currentPage + 1);
+    if (type === 'size') {
+      this.itemsPerPage = value;
+      this.currentPage = 1;
     }
+
+    this.emitPaginationChange();
   }
 
-  previousPage() {
-    if (this.currentPage > 1) {
-      this.changePage(this.currentPage - 1);
-    }
-  }
-
-  firstPage() {
-    this.changePage(1);
-  }
-
-  lastPage() {
-    this.changePage(this.totalPages);
-  }
-
-  handleSelectChange(event: any) {
-    this.itemsPerPage = event;
-    this.currentPage = 1;
-    this.onItemsPerPageChange.emit(this.itemsPerPage);
+  private emitPaginationChange() {
+    this.onPaginationChange.emit({
+      page: this.currentPage,
+      size: this.itemsPerPage,
+    });
   }
 }

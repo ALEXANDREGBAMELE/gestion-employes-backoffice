@@ -39,7 +39,7 @@ export class CustomButtonComponent implements OnInit {
 
   getButtonClasses(): string {
     const baseClasses = [
-      'tw-py-2',
+      'tw-py-0.5',
       'tw-px-4',
       'tw-rounded',
       'tw-font-medium',

@@ -95,6 +95,8 @@ export class CustomDynamicFormComponent implements OnInit, OnDestroy {
 
   private patchFormValues(data: { [key: string]: any }) {
     this.formGroup.patchValue(data);
+    console.log("data : ", data);
+
   }
 
 
@@ -134,6 +136,7 @@ export class CustomDynamicFormComponent implements OnInit, OnDestroy {
       this.isSubmitted = false
     }
   }
+
 
   onCancel() {
     this.isModalOpen.emit(false)

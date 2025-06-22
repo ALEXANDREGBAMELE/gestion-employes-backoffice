@@ -16,7 +16,7 @@ export interface INavData {
 
     /** Indique si l'élément est désactivé (optionnel) */
     disabled?: boolean;
-
+    isOpening?: boolean;
     isOpen?: boolean;
     /** Sous-éléments de navigation (optionnel) */
     children?: INavData[];
@@ -35,100 +35,200 @@ export interface INavData {
 }
 
 
+// export const navData: INavData[] = [
+//     {
+//         title: 'Dashboard',
+//         icon: 'ri-dashboard-horizontal-line',
+//         url: '/dashboard',
+//         active: true,
+//     },
+//     {
+//         title: 'Administration',
+//         icon: 'ri-dashboard-horizontal-line',
+//         active: true,
+//         children: [
+//             {
+//                 title: 'Direction générale',
+//                 url: '/users/add',
+//             },
+//             {
+//                 title: 'Département RH',
+//                 // url: '/users/add',
+//                 children: [
+//                     {
+//                         title: "Employé",
+//                         url: '/employee',
+//                     },
+//                     {
+//                         title: "Contract",
+//                         // url: '/contract',
+//                         children: [
+//                             {
+//                                 title: "Liste des contracts",
+//                                 url: '/contract/list',
+//                             },
+//                             {
+//                                 title: "Type de contracts",
+//                                 url: 'contract/type',
+//                             },
+//                             {
+//                                 title: "Clause de contracts",
+//                                 url: 'contract/clause',
+//                             }
+//                         ]
+//                     },
+
+//                 ]
+//             },
+//             {
+//                 title: 'Département informatique',
+//                 url: '/users/add',
+//             },
+//             {
+//                 title: 'Département finance',
+//                 url: '/users/add',
+//             },
+//         ]
+//     },
+//     {
+//         title: 'Utilisateurs',
+//         icon: 'ri-user-add-line',
+//         isOpen: false,
+
+//         url: '/users/list',
+//         // badge: { count: 5, class: 'bg-red-500 text-white' },
+
+
+//     },
+//     {
+//         title: 'Settings',
+//         icon: 'ri-settings-4-line',
+//         // url: '/settings',
+//         disabled: false, // Cet élément est désactivé
+//         children: [
+//             {
+//                 title: 'Entreprise',
+//                 url: '/parametre'
+//             },
+//             {
+//                 title: 'Département',
+//                 url: '/department'
+//             },
+//             {
+//                 title: 'Type de contract',
+//                 url: '/contract-type'
+//             },
+//             {
+//                 title: 'Profile',
+//                 url: '/profile'
+//             }
+//         ]
+//     },
+//     {
+//         title: 'Custom Action',
+//         icon: 'fas fa-star',
+//         url: '/custom',
+//         disabled: true,
+
+//         onClick: () => {
+//             console.log('Custom action triggered!');
+//         },
+
+//     },
+
+// ];
+
+
 export const navData: INavData[] = [
+    // DASHBORD
     {
         title: 'Dashboard',
         icon: 'ri-dashboard-horizontal-line',
         url: '/dashboard',
         active: true,
     },
+    // EMPLOYE
     {
-        title: 'Administration',
-        icon: 'ri-dashboard-horizontal-line',
-        active: true,
+        title: 'Employé',
+        icon: 'ri-user-line',
         children: [
+            { title: 'Accueil', url: '/employee/dashboard' },
+            { title: 'Mon profil', url: '/employee/profile' },
+            { title: 'Mes fiches de paie', url: '/employee/payslips' },
+            { title: 'Mes congés', url: '/employee/leaves' },
+            { title: 'Mes formations', url: '/employee/trainings' },
+        ]
+    },
+
+    // MANAGER
+    {
+        title: 'Manager',
+        icon: 'ri-team-line',
+        children: [
+            { title: 'Accueil Manager', url: '/manager/dashboard' },
+            { title: 'Mon équipe', url: '/manager/team' },
+            { title: 'Liste des membres', url: '/manager/team/members' },
+            { title: 'Valider congés', url: '/manager/leaves/validate' },
+            { title: 'Feedbacks collaborateurs', url: '/manager/feedback' },
+            { title: 'Performance équipe', url: '/manager/performance' },
+        ]
+    },
+
+    // RH
+    {
+        title: 'RH',
+        icon: 'ri-briefcase-4-line',
+        children: [
+            { title: 'Accueil RH', url: '/rh/dashboard' },
             {
-                title: 'Direction générale',
-                url: '/users/add',
+                title: 'Employés',
+                url: '/rh/employees'
             },
             {
-                title: 'Département RH',
-                // url: '/users/add',
+                title: 'Recrutement',
                 children: [
-                    {
-                        title: "Employé",
-                        url: '/employee',
-                    },
-                    {
-                        title: "Contract",
-                        // url: '/contract',
-                        children: [
-                            {
-                                title: "Liste des contracts",
-                                url: '/contract/list',
-                            },
-                            {
-                                title: "Type de contracts",
-                                url: 'contract/type',
-                            },
-                            {
-                                title: "Clause de contracts",
-                                url: 'contract/clause',
-                            }
-                        ]
-                    },
-
+                    { title: 'Offres en cours', url: '/rh/recruitment/offers' },
+                    { title: 'Candidats', url: '/rh/recruitment/candidates' },
                 ]
             },
             {
-                title: 'Département informatique',
-                url: '/users/add',
+                title: 'Contrats',
+                children: [
+                    { title: 'Liste des Contrats', url: '/rh/contracts' },
+                    { title: 'Types de Contrats', url: '/rh/contracts/types' },
+                    { title: 'Clauses de Contrats', url: '/rh/contracts/clauses' },
+                ],
             },
-            {
-                title: 'Département finance',
-                url: '/users/add',
-            },
+            { title: 'Rapports RH', url: '/rh/reports' },
         ]
     },
+
+    // ADMIN
     {
-        title: 'Users',
-        icon: 'ri-user-add-line',
-        isOpen: false,
+        title: 'Admin',
+        icon: 'ri-shield-user-line',
         children: [
+            { title: 'Accueil Admin', url: '/admin/dashboard' },
             {
-                title: 'Add User',
-                url: '/users/add',
+                title: 'Utilisateurs',
+                url: '/admin/users/list'
+
+            },
+            { title: 'Gestion des rôles', url: '/admin/users/roles' },
+            {
+                title: 'Départements',
+                url: '/admin/departments'
+
             },
             {
-                title: 'List Users',
-                url: '/users/list',
-                // badge: { count: 5, class: 'bg-red-500 text-white' },
-            },
-        ],
-    },
-    {
-        title: 'Settings',
-        icon: 'ri-settings-4-line',
-        // url: '/settings',
-        disabled: false, // Cet élément est désactivé
-        children: [
-            {
-                title: 'Entreprise',
-                url: '/parametre'
+                title: 'Paramètres Généraux',
+                children: [
+                    { title: 'Configurations', url: '/admin/settings/configurations' },
+                    { title: 'Sécurité', url: '/admin/settings/security' },
+                ]
             }
         ]
-    },
-    {
-        title: 'Custom Action',
-        icon: 'fas fa-star',
-        url: '/custom',
-        disabled: true,
-
-        onClick: () => {
-            console.log('Custom action triggered!');
-        },
-
-    },
-
+    }
 ];
+
 

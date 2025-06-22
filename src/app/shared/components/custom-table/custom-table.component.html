@@ -1,97 +1,161 @@
 <div class="tw-relative tw-overflow-x-auto tw-shadow-md tw-sm:rounded-lg">
-    <table class="tw-w-full tw-text-sm tw-text-left rtl:tw-text-right tw-text-gray-500 dark:tw-text-gray-400">
-        <thead class="tw-text-xs tw-text-gray-700 tw-bg-gray-50 dark:tw-bg-gray-700 tw-w-full">
-            <tr class="tw-border-y-2 tw-border-black tw-py-6 tw-px-3">
-                <th scope="tw-col" class="tw-px-4 tw-py-2">#</th>
-                <th scope="tw-col" *ngFor="let header of tableHeaderData" class="tw-px-4 tw-py-2">
-                    {{ header.name }}
-                </th>
-                <th *ngIf="tableActionButtons?.length" class="tw-text-center">Actions</th>
-            </tr>
-        </thead>
+  <table
+    class="tw-w-full tw-text-sm tw-text-left rtl:tw-text-right tw-text-gray-500 dark:tw-text-gray-400"
+  >
+    <thead
+      class="tw-text-xs tw-text-gray-700 tw-bg-gray-50 dark:tw-bg-gray-700 tw-w-full"
+    >
+      <tr class="tw-border-y-2 tw-border-black tw-py-6 tw-px-3">
+        <th scope="tw-col" class="tw-px-4 tw-py-2">#</th>
+        <th
+          scope="tw-col"
+          *ngFor="let header of tableHeaderData"
+          class="tw-px-4 tw-py-2"
+        >
+          {{ header.name }}
+        </th>
+        <th *ngIf="tableActionButtons?.length" class="tw-text-center">
+          Actions
+        </th>
+      </tr>
+    </thead>
 
-        <tbody class="tw-border-b-2 tw-border-black">
-            <ng-container *ngIf="!isLoading; else loadingSpinner">
-                <!-- Vérification si le tableau est vide -->
-                <tr *ngIf="tableBodyData && tableBodyData.length === 0 ">
-                    <td colspan="100%" class="tw-text-center tw-p-5">
-                        Aucune donnée disponible pour le moment.
-                    </td>
-                </tr>
+    <tbody class="tw-border-b-2 tw-border-black">
+      <ng-container *ngIf="!isLoading; else loadingSpinner">
+        <!-- Vérification si le tableau est vide -->
+        <tr *ngIf="tableBodyData && tableBodyData.length === 0">
+          <td colspan="100%" class="tw-text-center tw-p-5">
+            Aucune donnée disponible pour le moment.
+          </td>
+        </tr>
 
-                <!-- Affichage des données si le tableau n'est pas vide -->
-                <tr *ngFor="let row of tableBodyData; let i = index" (click)="handleRowClick(row)"
-                    [ngClass]="{'tw-bg-white': i % 2 === 0, 'tw-bg-gray-100': i % 2 !== 0}"
-                    class="tw-border-b dark:tw-bg-gray-800 tw-border-[#FDE8E8] hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600">
-                    <td class="tw-px-4 tw-py-2">{{ i + 1 }}</td>
-                    <td *ngFor="let header of tableHeaderData" class="tw-px-4 tw-py-2">
-                        <!-- Custom renderer for different types of data -->
-                        <ng-container [ngSwitch]="getFileType(row[header.value])">
-                            <!-- <ng-container *ngIf="concat;else templateName">
-                                <span> {{{{ row[header.concat[0]] }} + ' ' + {{ row[header[1]] }}}} </span>
-                            </ng-container> -->
-                            <ng-container *ngIf="isBadgeColumn(header.value); else normalCell">
-                                <span
-                                    class="tw-inline-block tw-px-3 tw-py-1 tw-text-xs tw-font-semibold tw-rounded-full"
-                                    [ngClass]="getBadgeClass(header.value, row[header.value])">
-                                    {{ row[header.value] }}
-                                </span>
-                            </ng-container>
-                            <ng-template #normalCell>
-                                <!-- Text -->
-                                <span *ngSwitchCase="'text'" [ngClass]="getBadgeClass(header.value, row[header.value])">
-                                    {{ row[header.value] }}
-                                </span>
-
-                                <!-- Image -->
-                                <img *ngSwitchCase="'image'" [src]="row[header.value]"
-                                    class="tw-w-16 tw-h-16 tw-object-cover" alt="Image" />
-
-                                <!-- PDF -->
-                                <a *ngSwitchCase="'pdf'" [href]="row[header.value]" target="_blank"
-                                    class="tw-text-blue-500">
-                                    View PDF
-                                </a>
-
-                                <!-- Default for unsupported file types -->
-                                <span *ngSwitchDefault>
-                                    Unsupported file type
-                                </span>
-                            </ng-template>
-                        </ng-container>
-                    </td>
-
-                    <td *ngIf="tableActionButtons" class="tw-px-6 tw-py-4 tw-flex tw-justify-center">
-                        <ng-container *ngFor="let action of tableActionButtons">
-                            <button (click)="action.method(row)" [ngStyle]="action.style || {}"
-                                class="tw-mr-2 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-gray-100 dark:hover:tw-bg-gray-700">
-                                <i class="{{action.icon}} tw-text-xl tw-text-[{{action.color}}]"
-                                    title="{{action.title}}"></i>
-                            </button>
-                        </ng-container>
-                    </td>
-
-                </tr>
+        <!-- Affichage des données si le tableau n'est pas vide -->
+        <tr
+          *ngFor="let row of tableBodyData; let i = index"
+          (click)="handleRowClick(row)"
+          [ngClass]="{
+            'tw-bg-white': i % 2 === 0,
+            'tw-bg-gray-100': i % 2 !== 0
+          }"
+          class="tw-border-b dark:tw-bg-gray-800 tw-border-[#FDE8E8] hover:tw-bg-gray-100 dark:hover:tw-bg-gray-600"
+        >
+          <td class="tw-px-4 tw-py-2">{{ i + 1 }}</td>
+          <td *ngFor="let header of tableHeaderData" class="tw-px-4 tw-py-2">
+            <ng-container
+              *ngIf="header.concatItems; else normalCellWithoutConcat"
+            >
+              <span>
+                <!-- Boucle sur les éléments de concatItems -->
+                <ng-container
+                  *ngFor="let item of header.concatItems; let last = last"
+                >
+                  {{ row[item] }}
+                  <!-- Affiche la valeur correspondante -->
+                  <ng-container *ngIf="!last"> </ng-container>
+                  <!-- Ajoute un espace entre les valeurs sauf pour la dernière -->
+                </ng-container>
+              </span>
             </ng-container>
+            <ng-template #normalCellWithoutConcat>
+              <!-- Custom renderer for different types of data -->
+              <ng-container [ngSwitch]="getFileType(row[header.value])">
+                <!-- <ng-container *ngIf="row[header.concatItems] > 0;else templateName">
+                                                            <span *ngFor="let item of concatItems"> {{{{ row[header.concatItems[item]] }} + ' '}}
+                                                            </span>
+                                                        </ng-container> -->
+                <ng-container
+                  *ngIf="isBadgeColumn(header.value); else normalCell"
+                >
+                  <span
+                    class="tw-inline-block tw-px-3 tw-py-1 tw-text-xs tw-font-semibold tw-rounded-full"
+                    [ngClass]="getBadgeClass(header.value, row[header.value])"
+                  >
+                    {{ row[header.value] }}
+                  </span>
+                </ng-container>
+                <ng-template #normalCell>
+                  <!-- Text -->
+                  <span
+                    *ngSwitchCase="'text'"
+                    [ngClass]="getBadgeClass(header.value, row[header.value])"
+                  >
+                    {{ row[header.value] }}
+                  </span>
 
-            <!-- Affichage du spinner pendant le chargement -->
-            <ng-template #loadingSpinner>
-                <td colspan="100%" class="tw-text-center tw-p-5 tw-flex tw-justify-center">
-                    <div role="status">
-                        <svg aria-hidden="true"
-                            class="tw-w-8 tw-h-8 tw-text-gray-200 tw-animate-spin dark:tw-text-gray-600 tw-fill-blue-600"
-                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                fill="currentColor" />
-                            <path
-                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                fill="currentFill" />
-                        </svg>
-                        <span class="tw-sr-only">Loading...</span>
-                    </div>
-                </td>
+                  <!-- Image -->
+                  <img
+                    *ngSwitchCase="'image'"
+                    [src]="row[header.value]"
+                    class="tw-w-16 tw-h-16 tw-object-cover"
+                    alt="Image"
+                  />
+
+                  <!-- PDF -->
+                  <a
+                    *ngSwitchCase="'pdf'"
+                    [href]="row[header.value]"
+                    target="_blank"
+                    class="tw-text-blue-500"
+                  >
+                    View PDF
+                  </a>
+
+                  <!-- Default for unsupported file types -->
+                  <span *ngSwitchDefault> Unsupported file type </span>
+                </ng-template>
+              </ng-container>
             </ng-template>
-        </tbody>
-    </table>
+          </td>
+
+          <td
+            *ngIf="tableActionButtons"
+            class="tw-px-6 tw-py-4 tw-flex tw-justify-center"
+          >
+            <ng-container *ngFor="let action of tableActionButtons">
+              <button
+                (click)="action.method(row)"
+                [ngStyle]="action.style || {}"
+                class="tw-mr-2 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-gray-50 dark:hover:tw-bg-gray-700"
+              >
+                <i
+                  class="{{ action.icon }} tw-text-md tw-text-[{{
+                    action.color
+                  }}]"
+                  title="{{ action.title }}"
+                ></i>
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+
+      <!-- Affichage du spinner pendant le chargement -->
+      <ng-template #loadingSpinner>
+        <td
+          colspan="100%"
+          class="tw-text-center tw-p-5 tw-flex tw-justify-center"
+        >
+          <div role="status">
+            <svg
+              aria-hidden="true"
+              class="tw-w-8 tw-h-8 tw-text-gray-200 tw-animate-spin dark:tw-text-gray-600 tw-fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor"
+              />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill"
+              />
+            </svg>
+            <span class="tw-sr-only">Loading...</span>
+          </div>
+        </td>
+      </ng-template>
+    </tbody>
+  </table>
 </div>
